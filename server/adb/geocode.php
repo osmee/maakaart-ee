@@ -1,9 +1,11 @@
 <?php
 
 include_once("lest.php");
+include_once("config.php");
+
 $MAX_RESULT_ROWS=10;
 
- $dbconn = pg_connect("host=localhost dbname=adb2 user=postgres password=MqC58f8T")
+ $dbconn = pg_connect("host=$db_host dbname=$db_name user=$db_user password=$db_password")
 		or die('Could not connect: ' . pg_last_error());
 
 
