@@ -1,0 +1,29 @@
+ 12 Linnuse küla, 94701 Muhu-Liiva , Saare maakond : code:11 : Saare maakond, Leisi vald, Linnuse küla count:10 x:22.5212858961 y:58.4930577428
+ -> Muhu vald
+ 
+ 20 1. Mai tn 2-a, 79101 Järvakandi, Rapla maakond : code:9 : Rapla maakond, Järvakandi vald count:10 x:24.8110963263 y:58.7784298082
+ -> Tänav olemas peaks olema
+ 
+ 23 Võlli 4, Tori alevik, 86801 Tori vald, Pärnu maakond : code:6 : Pärnu maakond, Tori vald, Tori alevik, Võlli tee 14 count:2 x:24.8314700384 y:58.4790439138
+  -> majanumber? . Andmed: peab olema "Võlli tee"
+  
+27 Tähtvere 56/62, 50050 Tartu : code:9 : Tartu maakond count:10 x:26.8324041053 y:58.3939894363
+  -> Maja täpsusega, "/" sees
+
+29 Tahkuna, Kõrgessaare vald, Hiiumaa : code:2 : Hiiu maakond, Kõrgessaare vald, Kauste küla, Tahkuna majaka tee nr 113 lõik Kauste-Tahkuna km 5,0-10,6 count:10 x:22.5906797447 y:59.0682836237
+ -> küla peaks leidma?
+ 
+ 37 Tartu mnt 21, Ahja 63701, Põlvamaa : code:8 : Põlva maakond, Ahja vald, Ahja alevik, Tartu mnt count:10 x:27.0731301407 y:58.2104344502
+ -> majanr puudu?
+ 
+ 43 Luua, Palamuse vald, 49203 Jõgevamaa : code:5 : Jõgeva maakond, Palamuse vald, Ehavere küla, 14210 Luua-Vaidavere count:10 x:26.6419346267 y:58.6511183243
+ -> küla peaks leidma
+ 
+ 45 Nurga talu, Kiideva küla, 90402 Ridala vald, Lääne maakond : code:9 : Lääne maakond, Ridala vald, Kiideva küla count:10 x:23.5525167533 y:58.7749009906
+ -> talu nime ei leia?
+ 
+ 46 Hanila, 90102 Hanila vald, Lääne maakond : code:5 : Lääne maakond, Hanila vald, 16185 Hanila-Hõbesalu maantee km 0-10,0 lõik Hanila-Rame count:10 x:20.7761287869 y:6.57097151985
+ -> küla peaks leidma
+ 
+ 55 Pikk 3, 46202 Väike-Maarja, Lääne-Virumaa : code:6 : Lääne-Viru maakond, Väike-Maarja vald, Kiltsi alevik, Pikk tn 11-3 count:10 x:20.7761287869 y:6.57097151985
+ -> vale asula
