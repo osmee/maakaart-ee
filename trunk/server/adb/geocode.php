@@ -124,6 +124,31 @@ if (sizeof($res)>=1){
  return mk_response($res,2);
  }
 
+ 
+# remove_postcode, tn fix, remove after /, nimisasula (repeat middle)
+$qq="";
+ $qq.=maakond_fix($qa[2])."%";
+ $qq.=remove_postcode($qa[1])."%";
+ $qq.=remove_postcode($qa[1])."%";
+ $qq.=remove_after_slash(tanav_fix(remove_postcode($qa[0])))."% ";
+
+$res=address_try($qq);
+if (sizeof($res)>=1){
+ return mk_response($res,3.75);
+ }
+ 
+ # remove_postcode, tn fix, remove after /, nimisasula (repeat middle), remove letters fron house
+$qq="";
+ $qq.=maakond_fix($qa[2])."%";
+ $qq.=remove_postcode($qa[1])."%";
+ $qq.=remove_postcode($qa[1])."%";
+ $qq.=remove_after_slash(house_noletter(tanav_fix(remove_postcode($qa[0]))))."%";
+
+$res=address_try($qq);
+if (sizeof($res)>=1){
+ return mk_response($res,3.8);
+ }
+
 # remove_postcode, tn fix
 $qq="";
 for ($i=sizeof($qa)-1;$i>=1;$i--){
@@ -159,32 +184,7 @@ for ($i=sizeof($qa)-1;$i>=1;$i--){
 $res=address_try($qq);
 if (sizeof($res)>=1){
  return mk_response($res,3.6);
- }
- 
-# remove_postcode, tn fix, remove after /, nimisasula (repeat middle)
-$qq="";
- $qq.=maakond_fix($qa[2])."%";
- $qq.=remove_postcode($qa[1])."%";
- $qq.=remove_postcode($qa[1])."%";
- $qq.=remove_after_slash(tanav_fix(remove_postcode($qa[0])))."% ";
-
-$res=address_try($qq);
-if (sizeof($res)>=1){
- return mk_response($res,3.75);
- }
- 
- # remove_postcode, tn fix, remove after /, nimisasula (repeat middle), remove letters fron house
-$qq="";
- $qq.=maakond_fix($qa[2])."%";
- $qq.=remove_postcode($qa[1])."%";
- $qq.=remove_postcode($qa[1])."%";
- $qq.=remove_after_slash(house_noletter(tanav_fix(remove_postcode($qa[0]))))."%";
-
-$res=address_try($qq);
-if (sizeof($res)>=1){
- return mk_response($res,3.8);
- }
- 
+ } 
 
 # remove_postcode
 $qq="";
@@ -297,6 +297,18 @@ if (sizeof($res)>=1){
  return mk_response($res,5);
  }
 
+   # remove_postcode, tn fix, no maakond, remove after slash
+$qq="%";
+for ($i=sizeof($qa)-1;$i>=1;$i--){
+ $qq.=remove_postcode($qa[$i])."% ";
+}
+ $qq.=remove_after_slash(tanav_fix(remove_postcode($qa[$i])))."% ";
+
+$res=address_try($qq);
+if (sizeof($res)>=1){
+ return mk_response($res,5.03);
+ }
+ 
   # remove_postcode, tn fix, no maakond, house noletter
 $qq="%";
 for ($i=sizeof($qa)-1;$i>=1;$i--){
