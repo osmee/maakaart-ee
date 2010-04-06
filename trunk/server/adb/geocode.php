@@ -1,16 +1,15 @@
 <?php
-
+$debug=1;
 include_once("lest.php");
 include_once("config.php");
 
 $MAX_RESULT_ROWS=10;
-
- $dbconn = pg_connect("host=$db_host dbname=$db_name user=$db_user password=$db_password")
+ $dbconn = pg_connect("host=$db_host dbname=$db_name user=$db_username password=$db_password")
 		or die('Could not connect: ' . pg_last_error());
 
-
 $query = "select id,raddress from test_requests where id in(12,20,23,27,29,37,43,45,46,55) ";
-$query = "select id,raddress from test_requests where id>146";
+$query = "select id,raddress from test_requests where id=90";
+#$query = "select id,raddress from test_requests where ok=false or ok is null limit 1";
 
 	//print $query;
  $qdb = pg_query($query) or die('Query failed: ' . pg_last_error());		
@@ -90,7 +89,6 @@ $res=address_try($qq);
 if (sizeof($res)>=1){
  return mk_response($res,1.5);
  }
-
  
 # add %
 $qq="";
@@ -126,6 +124,18 @@ $res=address_try($qq);
 if (sizeof($res)>=1){
  return mk_response($res,3.5);
  }
+
+ # remove_postcode, tn fix personfix, remove after slash
+$qq="";
+for ($i=sizeof($qa)-1;$i>=1;$i--){
+ $qq.=remove_postcode($qa[$i])."% ";
+}
+ $qq.=remove_after_slash(tanav_fix_personname(remove_postcode($qa[$i])))."% ";
+
+$res=address_try($qq);
+if (sizeof($res)>=1){
+ return mk_response($res,3.6);
+ }
  
 # remove_postcode, tn fix, remove after /, nimisasula (repeat middle)
 $qq="";
@@ -151,19 +161,7 @@ $res=address_try($qq);
 if (sizeof($res)>=1){
  return mk_response($res,4);
  }
-
- # remove_postcode, tn fix, no maakond
-$qq="%";
-for ($i=sizeof($qa)-1;$i>=1;$i--){
- $qq.=remove_postcode($qa[$i])."% ";
-}
- $qq.=tanav_fix(remove_postcode($qa[$i]))."% ";
-#print "backward nonumber_leading,add tn, no maakond try $qa\n";
-#print_r(address_try($qq));
-$res=address_try($qq);
-if (sizeof($res)>=1){
- return mk_response($res,5);
- }
+ 
 
  # remove_postcode, remove text after - (muhu-liiva -> muhu)
 $qq="";
@@ -175,13 +173,22 @@ if (sizeof($res)>=1){
  return mk_response($res,5.5);
  }
 
+  # remove_postcode, replace mnt with tn
+$qq="";
+for ($i=sizeof($qa)-1;$i>=0;$i--){
+ $qq.=replace_mnt(maakond_fix(remove_postcode($qa[$i])))."% ";
+}
+$res=address_try($qq);
+if (sizeof($res)>=1){
+ return mk_response($res,5.5);
+ }
+
+ 
 # remove_postcode, replace space
 $qq="";
 for ($i=sizeof($qa)-1;$i>=0;$i--){
  $qq.=replace_space(maakond_fix(remove_postcode($qa[$i])))."% ";
 }
-#print "backward nonumber_leading,replace space try $qa\n";
-#print_r(address_try($qq));
 $res=address_try($qq);
 if (sizeof($res)>=1){
  return mk_response($res,6);
@@ -192,8 +199,6 @@ $qq="";
 for ($i=0;$i<=sizeof($qa);$i++){
  $qq.=maakond_fix(remove_numbers($qa[$i]))."% ";
 }
-#print "forward nonumber try $qq\n";
-#print_r(address_try($qq));
 $res=address_try($qq);
 if (sizeof($res)>=1){
  return mk_response($res,7);
@@ -204,8 +209,6 @@ $qq="";
 for ($i=sizeof($qa)-1;$i>=0;$i--){
  $qq.=maakond_fix(remove_numbers($qa[$i]))."% ";
 }
-#print "backward nonumber try $qa\n";
-#print_r(address_try($qq));
 $res=address_try($qq);
 if (sizeof($res)>=1){
  return mk_response($res,8);
@@ -234,13 +237,11 @@ if (sizeof($res)>=1){
  return mk_response($res,9);
  }
 
-# remove_leading and last element
+# remove_leading and last element, replace space with %
 $qq="";
 for ($i=sizeof($qa)-1;$i>=1;$i--){
  $qq.=replace_space(maakond_fix(remove_postcode($qa[$i])))."% ";
 }
-#print "backward nonumber_leading without last, replace space with % try $qa\n";
-#print_r(address_try($qq));
 $res=address_try($qq);
 if (sizeof($res)>=1){
  return mk_response($res,10);
@@ -268,6 +269,36 @@ for ($i=sizeof($qa)-1;$i>=1;$i--){
 #print "backward nonumber_leading without last and second, replace space with % try $qa\n";
 #print_r(address_try($qq));
 $res=address_try($qq);
+
+
+# SLOW queries
+ 
+# start %, remove_postcode, no tn fix, no maakond
+$qq="%";
+for ($i=sizeof($qa)-1;$i>=1;$i--){
+ $qq.=remove_postcode($qa[$i])."% ";
+}
+ $qq.=remove_postcode($qa[$i])."% ";
+$res=address_try($qq);
+if (sizeof($res)>=1){
+ return mk_response($res,4.5);
+ }
+
+  # remove_postcode, tn fix, no maakond
+$qq="%";
+for ($i=sizeof($qa)-1;$i>=1;$i--){
+ $qq.=remove_postcode($qa[$i])."% ";
+}
+ $qq.=tanav_fix(remove_postcode($qa[$i]))."% ";
+#print "backward nonumber_leading,add tn, no maakond try $qa\n";
+#print_r(address_try($qq));
+$res=address_try($qq);
+if (sizeof($res)>=1){
+ return mk_response($res,5);
+ }
+
+
+
 if (sizeof($res)>=1){
  return mk_response($res,12);
  }
@@ -304,6 +335,10 @@ function remove_talu($t){
  return str_replace(" talu","",$t);
 }
 
+function replace_mnt($t){
+ return str_replace("mnt","tn",$t);
+}
+
 function remove_after_slash($t){
  list($m,$d)=split("/",$t);
 return $m;
@@ -314,6 +349,7 @@ function remove_after_hypern($t){
 return $m;
 }
 
+
 function maakond_fix($m){
  list($m,$d)=split("maa",$m);
 // $m=str_replace(" maakond","",$m);
@@ -322,8 +358,18 @@ return trim($m);
 
 function tanav_fix($m){
  list($t,$n)=split(" ",$m);
- return $t." tn ".$n;
+ // remove suffix, like "H."
+// list($dmy,$t2)=split("\.",$t);
+ return trim($t)." tn ".$n;
 }
+
+function tanav_fix_personname($m){
+ list($t,$n)=split(" ",$m);
+ // remove suffix, like "H."
+ list($dmy,$t2)=split("\.",$t);
+ return trim($t2)."%".$n;
+}
+
 
 function replace_space($m){
  return str_replace(" ","%",$m);
@@ -340,13 +386,15 @@ return $ret;
 } 
  
 function address_try($q){
-global $MAX_RESULT_ROWS,$dbconn;
+global $MAX_RESULT_ROWS,$dbconn,$debug;
 
     $time_start = microtime(true);
   
 $q=trim($q);
 	$query = "select * from aadressid where taisaadress like '$q'  order by length(taisaadress)";
-#	print "\n-- $query\n";
+	if ($debug){
+	 print "\n-- $query\n";
+	 }
 	//die();
 	$pr = pg_query($query) or die('Query failed: ' . pg_last_error());		
 		
@@ -355,7 +403,9 @@ $q=trim($q);
 		
 		    while (($ll = pg_fetch_array($pr, null, PGSQL_ASSOC)) && ($n_count<$MAX_RESULT_ROWS)){
 			
-	#		 print_r($ll);
+			 if ($debug){
+			  print_r($ll);
+			  }
 
 				$resp[$n_count]["address"] = $ll[taisaadress];
 				if (!empty($ll[viitepunkt_x])){
