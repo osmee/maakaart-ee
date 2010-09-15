@@ -5,7 +5,7 @@
 
 == cat /proc/cpuinfo ==
 {{{
-processor       : 0                        // Korda 8
+processor       : 0                        
 vendor_id       : AuthenticAMD
 cpu family      : 16
 model           : 9
