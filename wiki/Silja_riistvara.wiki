@@ -3,12 +3,7 @@
 
 = Silja riistvara =
 
-== OS ==
-{{{
-[root@silja anz]# cat /proc/version 
-Linux version 2.6.33.7-server-1mnb (herton@celeste.mandriva.com) (gcc version 4.4.3 (GCC) ) #1 SMP Thu Jun 17 21:11:54 UTC 2010
-}}}
-== Protsessor ==
+== cat /proc/cpuinfo ==
 {{{
 [root@silja anz]# cat /proc/cpuinfo
 processor       : 0                        // Korda 8
@@ -37,7 +32,7 @@ cache_alignment : 64
 address sizes   : 48 bits physical, 48 bits virtual
 power management: ts ttp tm stc 100mhzsteps hwpstate
 }}}
-== Mälu ==
+== cat /proc/meminfo ==
 {{{
 [root@silja anz]# cat /proc/meminfo 
 MemTotal:        8194216 kB
@@ -84,7 +79,7 @@ DirectMap2M:     2091008 kB
 DirectMap1G:     6291456 kB
 }}}
 
-== Kettad ==
+== cat /proc/diskstats | grep sd* ==
 {{{
    8       0 sda 8211 6802 357416 42300 27733 2962281 23922282 9848100 1 132850 9890430
    8       1 sda1 259 1325 2242 360 0 0 0 0 0 280 360
@@ -102,4 +97,39 @@ DirectMap1G:     6291456 kB
    8      96 sdg 798 59 28524 3400 489 1 1486 1130 0 1360 4530
    8     112 sdh 884 85 27396 3050 485 1 1431 370 0 1010 3420
 
+}}}
+
+== lcpci ==
+{{{
+[root@silja anz]# lspci
+00:00.0 Host bridge: ATI Technologies Inc RD890 PCI to PCI bridge (external gfx0 port A) (rev 02)
+00:04.0 PCI bridge: ATI Technologies Inc RD890 PCI to PCI bridge (PCI express gpp port D)
+00:09.0 PCI bridge: ATI Technologies Inc RD890 PCI to PCI bridge (PCI express gpp port H)
+00:0a.0 PCI bridge: ATI Technologies Inc RD890 PCI to PCI bridge (external gfx1 port A)
+00:11.0 SATA controller: ATI Technologies Inc SB700/SB800 SATA Controller [AHCI mode]
+00:12.0 USB Controller: ATI Technologies Inc SB700/SB800 USB OHCI0 Controller
+00:12.1 USB Controller: ATI Technologies Inc SB700 USB OHCI1 Controller
+00:12.2 USB Controller: ATI Technologies Inc SB700/SB800 USB EHCI Controller
+00:13.0 USB Controller: ATI Technologies Inc SB700/SB800 USB OHCI0 Controller
+00:13.1 USB Controller: ATI Technologies Inc SB700 USB OHCI1 Controller
+00:13.2 USB Controller: ATI Technologies Inc SB700/SB800 USB EHCI Controller
+00:14.0 SMBus: ATI Technologies Inc SBx00 SMBus Controller (rev 3d)
+00:14.1 IDE interface: ATI Technologies Inc SB700/SB800 IDE Controller
+00:14.3 ISA bridge: ATI Technologies Inc SB700/SB800 LPC host controller
+00:14.4 PCI bridge: ATI Technologies Inc SBx00 PCI to PCI Bridge
+00:14.5 USB Controller: ATI Technologies Inc SB700/SB800 USB OHCI2 Controller
+00:18.0 Host bridge: Advanced Micro Devices [AMD] K10 [Opteron, Athlon64, Sempron] HyperTransport Configuration
+00:18.1 Host bridge: Advanced Micro Devices [AMD] K10 [Opteron, Athlon64, Sempron] Address Map
+00:18.2 Host bridge: Advanced Micro Devices [AMD] K10 [Opteron, Athlon64, Sempron] DRAM Controller
+00:18.3 Host bridge: Advanced Micro Devices [AMD] K10 [Opteron, Athlon64, Sempron] Miscellaneous Control
+00:18.4 Host bridge: Advanced Micro Devices [AMD] K10 [Opteron, Athlon64, Sempron] Link Control
+00:19.0 Host bridge: Advanced Micro Devices [AMD] K10 [Opteron, Athlon64, Sempron] HyperTransport Configuration
+00:19.1 Host bridge: Advanced Micro Devices [AMD] K10 [Opteron, Athlon64, Sempron] Address Map
+00:19.2 Host bridge: Advanced Micro Devices [AMD] K10 [Opteron, Athlon64, Sempron] DRAM Controller
+00:19.3 Host bridge: Advanced Micro Devices [AMD] K10 [Opteron, Athlon64, Sempron] Miscellaneous Control
+00:19.4 Host bridge: Advanced Micro Devices [AMD] K10 [Opteron, Athlon64, Sempron] Link Control
+01:04.0 VGA compatible controller: Matrox Graphics, Inc. MGA G200eW WPCM450 (rev 0a)
+02:00.0 Ethernet controller: Intel Corporation 82574L Gigabit Network Connection
+03:00.0 Ethernet controller: Intel Corporation 82574L Gigabit Network Connection
+04:00.0 SCSI storage controller: Marvell Technology Group Ltd. MV64460/64461/64462 System Controller, Revision B (rev 01)
 }}}
