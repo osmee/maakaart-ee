@@ -5,7 +5,6 @@
 
 == cat /proc/cpuinfo ==
 {{{
-[root@silja anz]# cat /proc/cpuinfo
 processor       : 0                        // Korda 8
 vendor_id       : AuthenticAMD
 cpu family      : 16
@@ -34,7 +33,6 @@ power management: ts ttp tm stc 100mhzsteps hwpstate
 }}}
 == cat /proc/meminfo ==
 {{{
-[root@silja anz]# cat /proc/meminfo 
 MemTotal:        8194216 kB
 MemFree:           45932 kB
 Buffers:           18660 kB
