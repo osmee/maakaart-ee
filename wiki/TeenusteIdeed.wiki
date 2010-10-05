@@ -1,0 +1,22 @@
+#summary Üldtasemel plaanid arenduseks
+
+= Sissejuhatus =
+
+Siin on üldised ideed teenuste arenduseks. Üldine lähenemine oleks, et paneme aluseks üles sama kaardivaate mis on openstreetmap.org all, lisateenused lisame tab-idena ja linkidena vasakule.
+
+
+= Teenused =
+
+  * Kiire aadressotsing : OSM + ADS (aadressibaas), 
+  * bulk geocoding eelneva põhjal
+  * OSM veast/puudusest lihtne teavitamine
+  * Lihtne kaardieksport Garmini jaoks
+  * Teemaakaartide valik
+  * Lihtne teekonnaotsing (A->B)
+  * Interaktiivsed (klikitavad) POI punktid kaardil
+  * Eri kaartide võrdleja
+
+Ideid veel:
+  * GIS-väljund - export shapefiles
+  
+Vt. ka http://maakaart.uservoice.com/forums/76179-general
