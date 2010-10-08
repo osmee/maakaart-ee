@@ -7,7 +7,7 @@ Siin on üldised ideed teenuste arenduseks. Üldine lähenemine oleks, et paneme
 
 = Teenused =
 
-  * [AadressOtring Kiire aadressotsing] : OSM + ADS (aadressibaas), 
+  * [AadressOtsing Kiire aadressotsing] : OSM + ADS (aadressibaas), 
   * bulk geocoding eelneva põhjal
   * OSM veast/puudusest lihtne teavitamine
   * Lihtne kaardieksport Garmini jaoks
