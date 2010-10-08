@@ -46,4 +46,4 @@ Mitu vastet:
   * Pappa Pizza
   * Vene 16
 
- Vaata [http://code.google.com/p/maakaart-ee/source/browse/trunk/server/adb/muuseum_aadressid.txt siin source all] PHP-s tehtud prototüüpi, mille probleemiks on et on aeglane ja ei läbi osasid teste (leiab asukohti valest linnast)
+ Vaata [http://code.google.com/p/maakaart-ee/source/browse/trunk/server/adb/ siin source all] PHP-s tehtud prototüüpi, mille probleemiks on et on aeglane ja ei läbi osasid teste (leiab asukohti valest linnast)
