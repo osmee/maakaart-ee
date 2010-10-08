@@ -1,16 +1,17 @@
 #summary Aadressotsingu kirjeldus.
 
-= Introduction =
+= Tutvustus =
 
 Aadressotsing võimaldab kiiresti leida Eesti aadresse. Üldine loogika:
-1) Otsi Eesti OSM andmetest kasutades OSM Nominatim-i
-2) Otsi ADS-i andmebaasist. See on SQL andmebaas (PostgreSQL ilmselt), kuhu on ADS tabelid sisse laetud. 
+ # Otsi Eesti OSM andmetest kasutades OSM Nominatim-i
+ # Otsi ADS-i andmebaasist. See on SQL andmebaas (PostgreSQL ilmselt), kuhu on ADS tabelid sisse laetud. 
+ # Otsi globaalsetest OSM andmetest
 
 = Üldnõuded =
   * JSON (so AJAX) API
   * Vastus <100 ms
 
-= Tests =
+= Testid =
 Osalised aadressid, üks vaste (esimene kõige parem):
   * Kastani 16, Tartu
   * Tartu
