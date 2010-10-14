@@ -7,14 +7,17 @@ Siin on üldised ideed teenuste arenduseks. Üldine lähenemine oleks, et paneme
 
 = Teenused =
 
-  * [AadressOtsing Kiire aadressotsing] : OSM + ADS (aadressibaas), 
-  * bulk geocoding eelneva põhjal
-  * OSM veast/puudusest lihtne teavitamine
-  * Lihtne kaardieksport Garmini jaoks
-  * Teemaakaartide valik
-  * Lihtne teekonnaotsing (A->B)
-  * Interaktiivsed (klikitavad) POI punktid kaardil
-  * Eri kaartide võrdleja
+||*Teenus*||*Baastarkvara*||*staatus*||
+||[AadressOtsing Kiire aadressotsing] : OSM + ADS (aadressibaas)||Nominatim?||Prototüüp olemas, arendada||
+||Bulk geocoding eelneva põhjal||custom||arendada||
+||Standard tile server, mitme eri stiiliga (default mapnik, eestindatud, maakaart jms), võimalikult värsked andmed||Tirex||test toimib, konfida, kujundused||
+||OSMXAPI üles panna||OSMXAPI||installida||
+||OSM veast/puudusest lihtne teavitamine||?||kirjeldada,arendada||
+||Lihtne kaardieksport Garmini jaoks||olemas mitmeid||installida,konfida||
+||Teemakaartide valik||OpenLayers+web custom||arendada||
+||Lihtne teekonnaotsing (A->B)||Graphserver, pgrouting, ?||installida,konfida||
+||Interaktiivsed (klikitavad) POI punktid kaardil||OpenLayers,web custom||arendada||
+||Eri kaartide võrdleja||vt Geofabrik vahendit||installida,konfida||
 
 Ideid veel:
   * GIS-väljund - export shapefiles
