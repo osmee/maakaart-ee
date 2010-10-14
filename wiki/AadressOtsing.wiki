@@ -3,9 +3,9 @@
 = Tutvustus =
 
 Aadressotsing võimaldab kiiresti leida Eesti aadresse. Üldine loogika:
- # Otsi Eesti OSM andmetest kasutades OSM Nominatim-i
- # Otsi ADS-i andmebaasist. See on SQL andmebaas (PostgreSQL ilmselt), kuhu on ADS tabelid sisse laetud. 
- # Otsi globaalsetest OSM andmetest
+ # Otsi Eesti OSM andmetest kasutades [http://wiki.openstreetmap.org/wiki/Nominatim OSM Nominatim-i]. Täiendada seda (lisada sinna juurde Eesti tänavalühendid jms eripärad), kuni toimib piisavalt hästi OSM andmete seisukohast.
+ # Otsi ADS-i andmebaasist. See on SQL andmebaas (PostgreSQL ilmselt), kuhu on ADS tabelid sisse laetud. Alternatiiv oleks laadida OSM-i baasi aadresspunktid, siis eelmine punkt lahendaks ka selle asja.
+ # Otsi globaalsetest OSM andmetest. Suuresti sama mis eelnev.
 
 = Üldnõuded =
   * JSON (so AJAX) API
