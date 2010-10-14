@@ -2,7 +2,7 @@
 
 = Sissejuhatus =
 
-Siin on üldised ideed teenuste arenduseks. Üldine lähenemine oleks, et paneme aluseks üles sama kaardivaate mis on openstreetmap.org all, lisateenused lisame tab-idena ja linkidena vasakule.
+Siin on üldised ideed teenuste arenduseks. Üldine lähenemine oleks, et paneme aluseks üles sama kaardivaate mis on openstreetmap.org all, lisateenused lisame tab-idena ja linkidena vasakule. Kasutame maksimaalselt OSM ümber tehtud vabavaralisi lahendusi, täiendame neid endale vajalikus osas ja selle koodi jagame algprojektiga. Originaalarendused hoiame ja jagame siin Google Code projekti repos.
 
 
 = Teenused =
