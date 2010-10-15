@@ -1,0 +1,11 @@
+
+-- määra aadressobkekti tüüp
+select substr(ads_oid, 1, 2) as type, * from aadress_objektid;
+
+-- eri tüüpi aadressobjekte
+select type,count(*) from (
+ select substr(ads_oid, 1, 2) as type, * from aadress_objektid
+ ) as types group by type;
+
+
+ 
