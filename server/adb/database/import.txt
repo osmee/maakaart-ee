@@ -1,0 +1,10 @@
+psql ads
+@geocode_db_ddl.sql
+
+\encoding ISO_8859-4
+
+copy AADRESSID from '/home/jaakl/ADS_20100927/AADRESSID.csv' with delimiter as '\t' csv null as '' header;
+copy AADRESS_KOMPONENDID from '/home/jaakl/ADS_20100927/AADRESS_KOMPONENDID.csv' with delimiter as '\t' csv null as '' header;
+copy AADRESS_OBJEKTID from '/home/jaakl/ADS_20100927/AADRESS_OBJEKTID.csv' with delimiter as '\t' csv null as '' header;
+copy ADKOMP_SYNONYYMID from '/home/jaakl/ADS_20100927/ADKOMP_SYNONYYMID.csv' with delimiter as '\t' csv null as '' header;
+copy ADOB_AADRESSID from '/home/jaakl/ADS_20100927/ADOB_AADRESSID.csv' with delimiter as '\t' csv null as '' header;
