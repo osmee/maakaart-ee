@@ -23,3 +23,16 @@ Allolevad on jaakl subjektiivsed ettepanekud, mille üle võib alati diskuteerid
  * Esmaseks katsetuseks sobib maps.cloudmade.com Style Editor, sama seal saab muuta üsna vähe  asju.
  * Lõpptulemus tuleb vormistada Mapnik XML-kujundusena (Mapnik XML stylesheet). Juhendeid (tõsi üsna napilt) ja viite praegusele default kujundusele leiab http://wiki.openstreetmap.org/wiki/Mapnik#Customizing_the_rendering . 
  * Mapnik kujundusfaili ametlik kirjeldus on http://trac.mapnik.org/wiki/XMLConfigReference 
+
+= 30-sek juhend Mapnik stylesheeti =
+ * Mapnik stylesheet on XML fail, mis koosneb järgnevatest sektsioonidest:
+  * <Map> - ei ole vaja muuta
+  * <Style> - stiilid. Igal stiilil on unikaalne nimi ja seal sees on hulk  joonistamise reeglid. Reeglil on tavaliselt kolm osa:
+  - suurendusvahemiku määramine, kus stiil toimib. Näiteks suurendus (zoom) 10-12.
+  - filter, mis määrab andme-tag-d mille kohta stiil kehtib. Näiteks [highway]='residental' tähendab tänavaid
+  - symboli definitsioon, varieerub olenevalt kas tegu on punktide, aladega, tekstidega või joontega. Siin pannaksegi paika värvid, laiused, fondid, markerid jms
+ * <Layer> - kaardikihid. Style veel üksi ei joonista kaardile midagi, see määrab vaid kujunduse sisu, info lisamiseks peab olemas olema ka vastav Layer. Igal kihil on
+  - Üldandmed - unikaalne nimi, projektsioon
+  - Stiil, millega seda joonistatakse - viide <Style> elemendi nimele
+  - Datasource - kust andmed loetakse. OSM kujunduses kasutatakse siin makroid viitamaks OSM baasile, kujundajal seda muuta vaja ei ole; kasutada lihtsalt samasuguseid asju nagu teistel kihtidel.
+  - Kihid joonistatakse alt-üles, st kõige viimane failis jääb kaardipildil "kõige peale".
