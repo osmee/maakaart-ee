@@ -1,4 +1,5 @@
 #summary Kaardikujunduse parandamisest
+#labels Phase-Requirements
 
 = Probleemid Mapnik vaikimisi kaardikujundusega =
  * Üldiseid: http://www.41latitude.com/post/1310985699/openstreetmap-critique
@@ -6,23 +7,23 @@
 = Eesti-spetsiifilisi täiendusideid =
 Allolevad on jaakl subjektiivsed ettepanekud, mille üle võib alati diskuteerida. Üldine eesmärk on teha eelkõige võimalikult neutraalne kaardikujundus, mis näeks välja professionaalne, ei torkaks liialt silma nii kaardina (kus on oluline inforikkus) kui taustakaardina (mille peal näidatakse muud infot pealiskihina) kasutades.
 
-* Kohanimed kohalikus keeles -> muuta eesti(kui pole siis inglise)
+ * Kohanimed kohalikus keeles -> muuta eesti(kui pole siis inglise)
 keelseks.
-* Külanimed on halvasti nähtavad, võiksid olla väiksema suurendusega
+ * Külanimed on halvasti nähtavad, võiksid olla väiksema suurendusega
 välja tulla.
-* Teed on metsadeinfoga koos halvasti nähtavad. Eriti zoom=9,8
-* Metsaliigid ei eristu metsakihis. Praegu on kõik kuusekestena,
+ * Teed on metsadeinfoga koos halvasti nähtavad. Eriti zoom=9,8
+ * Metsaliigid ei eristu metsakihis. Praegu on kõik kuusekestena,
 sega ja lehtmetsal võiks olla pisut teine märk
-* Põllud tuleks teha valgeks, nähtamatuks, praeguse pruuni asemel
-* Osad suurendused on väikese infoga. Näiteks zoom 12-13 külanimed,
+ * Põllud tuleks teha valgeks, nähtamatuks, praeguse pruuni asemel
+ * Osad suurendused on väikese infoga. Näiteks zoom 12-13 külanimed,
 zoom=11 võiks valla (küla?) nimed olla, zoom=10 vallanimed, zoom=8 linnad ja
 asulad. Zoom 14 tertiary tee nimed (suured tänavad linnades)
-* POIsid võiks rohkem olla. Ilmselt on vajalik eraldi
+ * POIsid võiks rohkem olla. Ilmselt on vajalik eraldi
 kujundusvarianti POIdega (täiskaart) ja ilma nendeta (taustakaardiks)
-* Põllud (roheline muster) võiks 1 tase väiksema zoomiga välja tulla
+ * Põllud (roheline muster) võiks 1 tase väiksema zoomiga välja tulla
 (zoom=7). Katsetada vähemalt.
-* Soine mets ei tule välja, võiks olla roheline märgala triipudega näiteks
-* Linnas võikisid majade polügonid ja hoonestusalad olla vähemvärvilised, hallid
+ * Soine mets ei tule välja, võiks olla roheline märgala triipudega näiteks
+ * Linnas võikisid majade polügonid ja hoonestusalad olla vähemvärvilised, hallid
 (nagu googles)?
-* POI ikoonide täiendus - kas päris oma komplekt või mõned
+ * POI ikoonide täiendus - kas päris oma komplekt või mõned
 täiendavad? Suuremad ikoonid, mida saab klikitavaks teha
