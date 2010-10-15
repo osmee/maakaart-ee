@@ -36,3 +36,4 @@ Mapnik stylesheet on XML fail, mis koosneb järgnevatest sektsioonidest:
   # Stiil, millega seda joonistatakse - viide _Style_- elemendi nimele
   # Datasource - kust andmed loetakse. OSM kujunduses kasutatakse siin makroid viitamaks OSM baasile, kujundajal seda muuta vaja ei ole; kasutada lihtsalt samasuguseid asju nagu teistel kihtidel.
   # Kihid joonistatakse alt-üles, st kõige viimane failis jääb kaardipildil "kõige peale"
+ * Kui uurid OSM peamist kujundust (http://trac.openstreetmap.org/browser/applications/rendering/mapnik/osm.xml), siis näed et seal pole tegu ühe XML-failiga, vaid see on jagatud mitmetesse failidesse: eraldi failides on tehnilised parameetrid (nt andmebaasiühendus) ja mitmed kihtide grupid (nt veed). Lihtsalt üks fail läheks liiga suureks. Sisse loetakse kõik http://trac.openstreetmap.org/browser/applications/rendering/mapnik/inc failid. Sümbolipildid on http://trac.openstreetmap.org/browser/applications/rendering/mapnik/symbols kataloogis
