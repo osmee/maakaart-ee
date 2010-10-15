@@ -2,10 +2,13 @@
 -- määra aadressobkekti tüüp
 select substr(ads_oid, 1, 2) as type, * from aadress_objektid;
 
+select * from (select substr(ads_oid, 1, 2) as type, * from aadress_objektid) as aobj where type = 'CU';
+
 -- eri tüüpi aadressobjekte
 select type,count(*) from (
  select substr(ads_oid, 1, 2) as type, * from aadress_objektid
  ) as types group by type;
 
-
+SELECT * FROM aadress_objektid,adob_aadressid,aadressid WHERE  aadress_objektid.taisaadress LIKE '%Jülsi%' and  aadress_objektid.adob_id=adob_aadressid.adob_id and adob_aadressid.adr_id=aadressid.adr_id
  
+SELECT * FROM aadress_objektid,adob_aadressid,aadressid WHERE  aadress_objektid.taisaadress LIKE '%Tartu%Kastani tn 16' and  aadress_objektid.adob_id=adob_aadressid.adob_id and adob_aadressid.adr_id=aadressid.adr_id
