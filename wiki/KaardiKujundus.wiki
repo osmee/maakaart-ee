@@ -33,6 +33,6 @@ Mapnik stylesheet on XML fail, mis koosneb järgnevatest sektsioonidest:
   # symboli definitsioon, varieerub olenevalt kas tegu on punktide, aladega, tekstidega või joontega. Siin pannaksegi paika värvid, laiused, fondid, markerid jms
  * <Layer> - kaardikihid. Style veel üksi ei joonista kaardile midagi, see määrab vaid kujunduse sisu, info lisamiseks peab olemas olema ka vastav Layer. Igal kihil on
   # Üldandmed - unikaalne nimi, projektsioon
-  # Stiil, millega seda joonistatakse - viide <Style> elemendi nimele
+  # Stiil, millega seda joonistatakse - viide _Style_- elemendi nimele
   # Datasource - kust andmed loetakse. OSM kujunduses kasutatakse siin makroid viitamaks OSM baasile, kujundajal seda muuta vaja ei ole; kasutada lihtsalt samasuguseid asju nagu teistel kihtidel.
   # Kihid joonistatakse alt-üles, st kõige viimane failis jääb kaardipildil "kõige peale"
