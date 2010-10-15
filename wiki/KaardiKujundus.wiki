@@ -18,3 +18,8 @@ Allolevad on jaakl subjektiivsed ettepanekud, mille üle võib alati diskuteerid
  * Soine mets ei tule välja, võiks olla roheline märgala triipudega näiteks
  * Linnas võikisid majade polügonid ja hoonestusalad olla vähemvärvilised, hallid (nagu googles)?
  * POI ikoonide täiendus - kas päris oma komplekt või mõned täiendavad? Suuremad ikoonid, mida saab klikitavaks teha
+
+= Tehnilised vahendid/juhendid =
+ * Esmaseks katsetuseks sobib maps.cloudmade.com Style Editor, sama seal saab muuta üsna vähe  asju.
+ * Lõpptulemus tuleb vormistada Mapnik XML-kujundusena (Mapnik XML stylesheet). Juhendeid (tõsi üsna napilt) ja viite praegusele default kujundusele leiab http://wiki.openstreetmap.org/wiki/Mapnik#Customizing_the_rendering . 
+ * Mapnik kujundusfaili ametlik kirjeldus on http://trac.mapnik.org/wiki/XMLConfigReference 
