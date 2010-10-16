@@ -1,4 +1,9 @@
 
+-- lisa aadressidele geom tüüpi veerg ja täida see sisuga
+SELECT AddGeometryColumn ('public','aadressid','viitepunkt',3301,'POINT',2);
+
+update aadressid set viitepunkt = ST_SetSRID(ST_MakePoint(to_number(replace(viitepunkt_x,',','.'),'999999.99'),to_number(replace(viitepunkt_y,',','.'),'9999999.99')),3301);
+
 -- määra aadressobkekti tüüp
 select substr(ads_oid, 1, 2) as type, * from aadress_objektid;
 
@@ -12,3 +17,5 @@ select type,count(*) from (
 SELECT * FROM aadress_objektid,adob_aadressid,aadressid WHERE  aadress_objektid.taisaadress LIKE '%Jülsi%' and  aadress_objektid.adob_id=adob_aadressid.adob_id and adob_aadressid.adr_id=aadressid.adr_id
  
 SELECT * FROM aadress_objektid,adob_aadressid,aadressid WHERE  aadress_objektid.taisaadress LIKE '%Tartu%Kastani tn 16' and  aadress_objektid.adob_id=adob_aadressid.adob_id and adob_aadressid.adr_id=aadressid.adr_id
+
+SELECT aadressid.* FROM aadress_objektid,adob_aadressid,aadressid WHERE  aadress_objektid.ads_oid LIKE 'EE%' and  aadress_objektid.adob_id=adob_aadressid.adob_id and adob_aadressid.adr_id=aadressid.adr_id and viitepunkt && SetSRID('BOX3D(522397 6592349, 732858 6600729)'::box3d,3301) group by aadressid.adr_id,aadressid.koodaadress,aadressid.tase1_id,aadressid.tase2_id,aadressid.tase3_id,aadressid.tase4_id,aadressid.tase5_id,aadressid.tase6_id,aadressid.tase7_id,aadressid.tase8_id,aadressid.taisaadress,aadressid.lahiaadress,aadressid.viitepunkt_x,aadressid.viitepunkt_y,aadressid.olek,aadressid.aadr_tekst,aadressid.viitepunkt limit 10;
