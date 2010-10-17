@@ -15,7 +15,7 @@ Siin on üldised ideed teenuste arenduseks. Üldine lähenemine oleks, et paneme
 ||OSM veast/puudusest lihtne teavitamine||?||kirjeldada,arendada||
 ||Lihtne kaardieksport Garmini jaoks||olemas mitmeid||installida,konfida||
 ||Teemakaartide valik||OpenLayers+web custom||arendada||
-||Lihtne teekonnaotsing (A->B)||Graphserver, pgrouting, ?||installida,konfida||
+||Lihtne teekonnaotsing (A->B)||[http://sourceforge.net/apps/trac/routed/ OSRM], Graphserver, pgrouting, ?||installida,konfida||
 ||Interaktiivsed (klikitavad) POI punktid kaardil||OpenLayers,web custom||arendada||
 ||Eri kaartide võrdleja||vt Geofabrik vahendit||installida,konfida||
 
