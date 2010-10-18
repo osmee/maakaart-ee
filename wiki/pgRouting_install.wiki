@@ -1,0 +1,13 @@
+#summary One-sentence summary of this page.
+#labels Phase-Implementation,Phase-Requirements
+
+= pgRouting install =
+
+== Sõltuvused ==
+
+ * PostgreSQL http://www.postgresql.org/ftp/source/
+ * PostGIS http://www.postgresql.org/ftp/source/
+ * Proj http://download.osgeo.org/proj/
+ * GEOS http://trac.osgeo.org/geos/wiki/BuildingOnUnixWithCMake
+ * BGL (Boost) http://www.boost.org/users/download/
+ * GAUL http://gaul.sourceforge.net/
