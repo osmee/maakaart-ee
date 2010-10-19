@@ -69,3 +69,18 @@ Tuleb teha kaks sümboolset linki
    valida võib kõik extra laiendused (WITH_DD - Driving Distance, WITH_TSP - Traveling Salesperson functionality)
  # make
  # make install
+
+== Routingu baasi loomine ==
+ # Loo routingi baas ja lae PostGIS
+  * createdb -U postgres -E UNICODE routing
+  * createlang -U postgres plpgsql routing
+  * psql -U postgres -f /usr/share/postgresql/contrib/postgis-1.5/postgis.sql routing
+  * psql -U postgres -f /usr/share/postgresql/contrib/postgis-1.5/spatial_ref_sys.sql routing
+ # Lisa pgRouting peamised funktsionaalsused (nõutud)
+  * psql -U postgres -f /usr/share/postlbs/routing_core.sql routing
+  * psql -U postgres -f /usr/share/postlbs/routing_core_wrappers.sql routing
+ # Kui on soovi võib lisada pgRoutingu lisa funktsionaalsused
+  # TSP - Traveling Salesperson
+  * psql -U postgres -f /usr/share/postlbs/routing_tsp.sql routing
+  * psql -U postgres -f /usr/share/postlbs/routing_tsp_wrappers.sql routing
+  # DD - Driving Distance laadimine hetkel ei tööta
