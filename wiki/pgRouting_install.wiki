@@ -42,6 +42,14 @@ http://gaul.sourceforge.net/downloads.html
 === CGAL ===
 http://www.cgal.org/download.html
 
+ # mkdir build; cd build
+ # ccmake ../
+  * Soovitav valida CMAKE_INSTALL_PREFIX -ks /usr 
+  * cmake käsk -c
+  * cmake käsk -g
+ # make
+ # make install
+
 == pgRouting paigaldus ==
 http://pgrouting.postlbs.org/wiki/pgRoutingDownload
 
