@@ -52,6 +52,12 @@ Selleks, et pgRouting kompileeruks tuleb muuta järgmisi faile ja neile lisada �
   * extra/driving_distance/src/alpha.c
   * extra/driving_distance/src/drivedist.c
  peale _"executor/spi.h"_ tuleb lisada rida *#include "catalog/pg_type.h"*
-ln -s /usr/include/boost/property_map/vector_property_map.hpp /usr/include/boost/vector_property_map.hpp
 
-ln -s /usr/include/boost/property_map/property_map.hpp /usr/include/boost/property_map.hpp
+Tuleb teha kaks sümboolset linki
+ * ln -s /usr/include/boost/property_map/vector_property_map.hpp /usr/include/boost/vector_property_map.hpp
+ *ln -s /usr/include/boost/property_map/property_map.hpp /usr/include/boost/property_map.hpp
+
+ # ccmake .
+   valida võib kõik extra laiendused (WITH_DD - Driving Distance, WITH_TSP - Traveling Salesperson functionality)
+ # make
+ # make install
