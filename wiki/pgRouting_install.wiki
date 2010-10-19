@@ -5,9 +5,53 @@
 
 == Sõltuvused ==
 
- * PostgreSQL http://www.postgresql.org/ftp/source/
- * PostGIS http://www.postgresql.org/ftp/source/
- * Proj http://download.osgeo.org/proj/
- * GEOS http://trac.osgeo.org/geos/wiki/BuildingOnUnixWithCMake
- * BGL (Boost) http://www.boost.org/users/download/
- * GAUL http://gaul.sourceforge.net/
+=== PostgreSQL ===
+http://www.postgresql.org/ftp/source/
+
+Postgre peaks oleam juba eelnevalt paigaldatud. Vaata Postgre paigaldust siit.
+
+=== PostGIS === 
+http://www.postgresql.org/ftp/source/
+
+PostGIS peaks olema juba eelnevalt paigaldatud. Vaata PostGIS -i paigaldust siit.
+
+=== Proj ===
+http://download.osgeo.org/proj/
+
+Proj peaks olema eelnevalt juba paigaldatud läbi mapniku sõltuvuse. Vaata mapniku paigaldust siit
+
+=== GEOS === 
+http://trac.osgeo.org/geos/wiki/BuildingOnUnixWithCMake
+
+GEOS peaks olema eelnevalt juba paigaldatud läbi mapniku sõltuvuse. Vaata mapniku paigaldust siit
+
+=== BGL (Boost) ===
+http://www.boost.org/users/download/
+
+Boost peaks olema eelnevalt juba paigaldatud läbi mapniku sõltuvuse. Vaata mapniku paigaldust 
+
+=== GAUL ===
+http://gaul.sourceforge.net/downloads.html
+
+ * ./configure --prefix=/usr --enable-slang=no
+
+ * LC_ALL=C make
+
+ * make install
+
+=== CGAL ===
+http://www.cgal.org/download.html
+
+== pgRouting paigaldus ==
+http://pgrouting.postlbs.org/wiki/pgRoutingDownload
+
+Selleks, et pgRouting kompileeruks tuleb muuta järgmisi faile ja neile lisada üks rida:
+  * core/src/dijkstra.c
+  * core/src/astar.c
+  * core/src/shooting_star.c
+  * extra/driving_distance/src/alpha.c
+  * extra/driving_distance/src/drivedist.c
+ peale _"executor/spi.h"_ tuleb lisada rida *#include "catalog/pg_type.h"*
+ln -s /usr/include/boost/property_map/vector_property_map.hpp /usr/include/boost/vector_property_map.hpp
+
+ln -s /usr/include/boost/property_map/property_map.hpp /usr/include/boost/property_map.hpp
