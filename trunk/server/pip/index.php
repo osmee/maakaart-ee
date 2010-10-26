@@ -27,9 +27,10 @@ $sql="SELECT *, x(centroid(transform(way, 4326))) AS lon, y(centroid(transform(w
 // Run query
 $result = pg_query($sql) or die('Query failed: ' . pg_last_error());
 
-print "<table><tr><td>name</td><td>admin_level</td><td>name:et</td><td>name:en</td><td>lon</td><td>lat</td><td>all tags</td></tr>";
+print "<table><tr><td>osm_id</td><td>name</td><td>admin_level</td><td>name:et</td><td>name:en</td><td>lon</td><td>lat</td><td>all tags</td></tr>";
 while ($line = pg_fetch_array($result, null, PGSQL_ASSOC)) {
  print "<tr><td>";
+ print "<a href=\"http://www.openstreetmap.org/browse/way/".$line[osm_id]."\">".$line[osm_id]."</a> </td><td>";
  print $line[name]." </td><td>";
  print $line[admin_level]." </td><td>";
  print $line["name:et"]." </td><td>";
@@ -38,7 +39,7 @@ while ($line = pg_fetch_array($result, null, PGSQL_ASSOC)) {
  print $line[lat]." </td><td>";
  
  foreach($line as $key=>$val){
-   if($val && $key!="way" && $key != "lon" && $key != "lat" && $key != "name" && $key != "name:en" && $key != "name:et"){
+   if($val && $key!="way" && $key != "lon" && $key != "lat" && $key != "name" && $key != "name:en" && $key != "name:et" && $key != "osm_id"){
      print $key."=".$val.",";
    }
  }
