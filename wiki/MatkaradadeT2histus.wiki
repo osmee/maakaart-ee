@@ -1,8 +1,8 @@
  * highway=path
  * foot=designated
- * name=*
+ * name=
  * source=mehedliikuma.ee
- * distance=*
+ * distance=
 
  * [http://osm.org/go/0w8xyU4R-- Alatskivi]
  * [http://osm.org/go/0wzbc2nUd- Annikoru]
