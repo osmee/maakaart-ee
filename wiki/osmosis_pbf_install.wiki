@@ -8,4 +8,5 @@
  * psql -d osm -f /usr/share/postgresql/contrib/postgis-1.5/spatial_ref_sys.sql
  * psql -d osm -f /usr/share/postgresql/contrib/hstore.sql
  * psql -d osm -f /usr/local/osmosis/script/pgsql_simple_schema_0.6.sql
+ * export JAVACMD_OPTIONS="-Djava.io.tmpdir=/my/pretty/little/tempdir"
  * /usr/local/osmosis-0.38/bin/osmosis --read-pbf file="*file*.osm.pbf" --write-pgsql user=*username* database=osm password=osm
