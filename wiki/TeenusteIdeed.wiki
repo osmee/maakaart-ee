@@ -13,7 +13,7 @@ Siin on üldised ideed teenuste arenduseks. Üldine lähenemine oleks, et paneme
 ||Struktueeritud aadressotring: AJAX : ADS (aadressibaas)||custom||alus baas olemas, arendada 3 JSON päringut: all_cities, streets_in_city, houses_in_street||
 ||Standard tile server, mitme eri stiiliga (default mapnik, eestindatud, maakaart jms), võimalikult värsked andmed||Tirex||test toimib, konfida, kujundused||
 ||OSMXAPI üles panna||OSMXAPI||installida||
-||OSM veast/puudusest lihtne teavitamine||?||kirjeldada,arendada||
+||OSM veast/puudusest lihtne teavitamine||openstreetbugs||kirjeldada,arendada||
 ||Lihtne kaardieksport Garmini jaoks||olemas mitmeid||installida,konfida||
 ||Teemakaartide valik||OpenLayers+web custom||arendada||
 ||Lihtne teekonnaotsing (A->B)||[http://sourceforge.net/apps/trac/routed/ OSRM], Graphserver, pgrouting, http://opentripplanner.org/ ?||pgrouting balti andmetega olemas, lisa installida,konfida||
