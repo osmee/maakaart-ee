@@ -10,7 +10,7 @@ Siin on üldised ideed teenuste arenduseks. Üldine lähenemine oleks, et paneme
 ||*Teenus*||*Baastarkvara*||*staatus*||
 ||[AadressOtsing Kiire aadressotsing] : OSM + ADS (aadressibaas)||Nominatim?||Prototüüp olemas, arendada||
 ||Bulk geocoding eelneva põhjal||custom||arendada||
-||Struktueeritud aadressotring: AJAX : ADS (aadressibaas)||custom||alus baas olemas, arendada 3 JSON päringut: all_cities, streets_in_city, houses_in_street||
+||Struktueeritud aadressotring: AJAX : ADS (aadressibaas)||custom||alus baas olemas, arendada 3 JSON päringut: all_cities, streets_in_city, houses_in_street. Võibolla lisada Eesti Posti sihtnumbrid nende tabeli põhjal||
 ||Standard tile server, mitme eri stiiliga (default mapnik, eestindatud, maakaart jms), võimalikult värsked andmed||Tirex||test toimib, konfida, kujundused||
 ||OSMXAPI üles panna||OSMXAPI||installida||
 ||OSM veast/puudusest lihtne teavitamine||openstreetbugs||kirjeldada,arendada||
