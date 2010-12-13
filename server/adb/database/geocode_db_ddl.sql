@@ -242,3 +242,72 @@ CREATE TABLE test_requests
 )
 WITH (OIDS=FALSE);
 ALTER TABLE test_requests OWNER TO postgres;
+
+-- Table: ads_objtyybid
+
+DROP TABLE ads_objtyybid;
+
+CREATE TABLE ads_objtyybid
+(
+  kood character varying(2) NOT NULL,
+  nimetus character varying(30),
+  unik boolean,
+  inittase character varying(30),
+  mintase numeric,
+  maxtase numeric,
+  origregister character varying(100),
+  CONSTRAINT objtyyp_pk PRIMARY KEY (kood)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE ads_objtyybid OWNER TO postgres;
+
+-- Table: ma_komponendid
+
+-- DROP TABLE ma_komponendid;
+
+CREATE TABLE ma_komponendid
+(
+  ma_komp_id numeric,
+  ylemkomp_id numeric,
+  tase numeric,
+  ametlik_kood character varying,
+  ametlik_komp_id numeric,
+  nimetus character varying,
+  kehtetu character varying
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE ma_komponendid OWNER TO postgres;
+
+-- Table: ma_objektid
+
+-- DROP TABLE ma_objektid;
+
+CREATE TABLE ma_objektid
+(
+  ma_adob_id character varying,
+  ma_adob_liik character varying,
+  ametlik_liik character varying,
+  ads_oid character varying,
+  orig_tunnus character varying,
+  ma_adr_id character varying,
+  taisaadress character varying,
+  lahiaadress character varying,
+  viitepunkt_x character varying,
+  viitepunkt_y character varying,
+  tase1_id character varying,
+  tase2_id character varying,
+  tase3_id character varying,
+  tase4_id character varying,
+  tase5_id character varying,
+  tase6_id character varying,
+  tase7_id character varying,
+  tase8_id character varying
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE ma_objektid OWNER TO postgres;

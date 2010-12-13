@@ -1,16 +1,16 @@
-Kood	Nimetus	Unik	Inittase	Mintase	Maxtase	Origregister		
-MK	maakond	TRUE	1	1	1	maaregister		"<option value=""MK"">maakond</option>"
-OV	omavalitsus	TRUE	2	2	2	maaregister		"<option value=""OV"">omavalitsus</option>"
-AY	asustusüksus	TRUE	3	3	3	maaregister		"<option value=""AY"">asustusüksus</option>"
-LO	linnaosa	TRUE	3	3	3	maaregister		"<option value=""LO"">linnaosa</option>"
-LP	liikluspind	TRUE	5	5	5	LP register		"<option value=""LP"">liikluspind</option>"
-VK	väikekoht	TRUE	4	4	4	VK register		"<option value=""VK"">väikekoht</option>"
-CU	maaüksus	FALSE	6, 7, 8	6	8	maaregister		"<option value=""CU"">maaüksus</option>"
-KN	kohanimi	TRUE	6	6	6	kohanimeregister		"<option value=""KN"">kohanimi</option>"
-EE	elamu	TRUE	6, 7, 8	6	8	ehitisregister		"<option value=""EE"">elamu</option>"
-ME	mitteelamu	FALSE	6, 7, 8	6	8	ehitisregister		"<option value=""ME"">mitteelamu</option>"
-RA	rajatis	FALSE		3	7	ehitisregister		"<option value=""RA"">rajatis</option>"
-ER	eluruum	TRUE	8	8	8	ehitisregister		"<option value=""ER"">eluruum</option>"
-MR	mitteeluruum	TRUE	8	8	8	ehitisregister		"<option value=""MR"">mitteeluruum</option>"
-TT	teeregistri tee	FALSE	6	6	6	kohanimeregister		"<option value=""TT"">teeregistri tee</option>"
-MU	muinsuskaitseobjekt	FALSE	6					"<option value=""MU"">muinsuskaitseobjekt</option>"
+Kood	Nimetus	Unik	Inittase	Mintase	Maxtase	Origregister
+MK	maakond	TRUE	1	1	1	maaregister
+OV	omavalitsus	TRUE	2	2	2	maaregister
+AY	asustusüksus	TRUE	3	3	3	maaregister
+LO	linnaosa	TRUE	3	3	3	maaregister
+LP	liikluspind	TRUE	5	5	5	LP register
+VK	väikekoht	TRUE	4	4	4	VK register
+CU	maaüksus	FALSE	6, 7, 8	6	8	maaregister
+KN	kohanimi	TRUE	6	6	6	kohanimeregister
+EE	elamu	TRUE	6, 7, 8	6	8	ehitisregister
+ME	mitteelamu	FALSE	6, 7, 8	6	8	ehitisregister
+RA	rajatis	FALSE		3	7	ehitisregister
+ER	eluruum	TRUE	8	8	8	ehitisregister
+MR	mitteeluruum	TRUE	8	8	8	ehitisregister
+TT	teeregistri tee	FALSE	6	6	6	kohanimeregister
+MU	muinsuskaitseobjekt	FALSE	6			
