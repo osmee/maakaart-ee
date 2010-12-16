@@ -16,15 +16,6 @@ CREATE TABLE aadress_komponendid
 WITH (OIDS=FALSE);
 ALTER TABLE aadress_komponendid OWNER TO postgres;
 
--- Index: ind_adk_kood
-
--- DROP INDEX ind_adk_kood;
-
-CREATE INDEX ind_adk_kood
-  ON aadress_komponendid
-  USING btree
-  (kood);
-
 -- Table: aadress_objektid
 
 -- DROP TABLE aadress_objektid;
@@ -42,32 +33,6 @@ CREATE TABLE aadress_objektid
 WITH (OIDS=FALSE);
 ALTER TABLE aadress_objektid OWNER TO postgres;
 
--- Index: ind_lahiaadr2
-
--- DROP INDEX ind_lahiaadr2;
-
-CREATE INDEX ind_lahiaadr2
-  ON aadress_objektid
-  USING btree
-  (lahiaadress text_pattern_ops);
-
--- Index: indo_lahi2
-
--- DROP INDEX indo_lahi2;
-
-CREATE INDEX indo_lahi2
-  ON aadress_objektid
-  USING btree
-  (lahiaadress text_pattern_ops);
-
--- Index: indo_oid
-
--- DROP INDEX indo_oid;
-
-CREATE INDEX indo_oid
-  ON aadress_objektid
-  USING btree
-  (ads_oid text_pattern_ops);
 
 -- Table: aadressid
 
@@ -96,95 +61,6 @@ CREATE TABLE aadressid
 WITH (OIDS=FALSE);
 ALTER TABLE aadressid OWNER TO postgres;
 
--- Index: ind_lahi2
-
--- DROP INDEX ind_lahi2;
-
-CREATE INDEX ind_lahi2
-  ON aadressid
-  USING btree
-  (lahiaadress text_pattern_ops);
-
--- Index: ind_lahiaadr
-
--- DROP INDEX ind_lahiaadr;
-
-CREATE INDEX ind_lahiaadr
-  ON aadressid
-  USING btree
-  (lahiaadress);
-
--- Index: ind_t1
-
--- DROP INDEX ind_t1;
-
-CREATE INDEX ind_t1
-  ON aadressid
-  USING btree
-  (tase1_id);
-
--- Index: ind_t4
-
--- DROP INDEX ind_t4;
-
-CREATE INDEX ind_t4
-  ON aadressid
-  USING btree
-  (tase4_id);
-
--- Index: ind_t5
-
--- DROP INDEX ind_t5;
-
-CREATE INDEX ind_t5
-  ON aadressid
-  USING btree
-  (tase5_id);
-
--- Index: ind_t6
-
--- DROP INDEX ind_t6;
-
-CREATE INDEX ind_t6
-  ON aadressid
-  USING btree
-  (tase6_id);
-
--- Index: ind_t7
-
--- DROP INDEX ind_t7;
-
-CREATE INDEX ind_t7
-  ON aadressid
-  USING btree
-  (tase7_id);
-
--- Index: ind_t8
-
--- DROP INDEX ind_t8;
-
-CREATE INDEX ind_t8
-  ON aadressid
-  USING btree
-  (tase8_id);
-
--- Index: ind_tais2
-
--- DROP INDEX ind_tais2;
-
-CREATE INDEX ind_tais2
-  ON aadressid
-  USING btree
-  (taisaadress text_pattern_ops);
-
--- Index: ind_taisaadress
-
--- DROP INDEX ind_taisaadress;
-
-CREATE INDEX ind_taisaadress
-  ON aadressid
-  USING btree
-  (taisaadress);
 
 -- Table: adkomp_synonyymid
 
@@ -202,14 +78,6 @@ CREATE TABLE adkomp_synonyymid
 WITH (OIDS=FALSE);
 ALTER TABLE adkomp_synonyymid OWNER TO postgres;
 
--- Index: adkomp_ind1
-
--- DROP INDEX adkomp_ind1;
-
-CREATE INDEX adkomp_ind1
-  ON adkomp_synonyymid
-  USING btree
-  (otsistring text_pattern_ops);
 
 -- Table: adob_aadressid
 
@@ -311,3 +179,26 @@ WITH (
   OIDS=FALSE
 );
 ALTER TABLE ma_objektid OWNER TO postgres;
+
+-- sihtnumbrid, csv failist www.post.ee saidilt (10.12.2010 seisuga toiminud formaat)
+
+-- Table: sihtnumbrid
+
+-- DROP TABLE sihtnumbrid;
+
+CREATE TABLE sihtnumbrid
+(
+  maakond character varying,
+  vald character varying,
+  asula character varying,
+  tanav character varying,
+  aadressiliik character varying,
+  majaalgus character varying,
+  majalopp character varying,
+  sihtnumber character varying
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE sihtnumbrid OWNER TO jaakl;
+
