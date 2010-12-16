@@ -22,3 +22,8 @@
  * zfs create media/mod_tile
  * zfs create media/test
  * zfs create media/osmdata
+
+Kasulikud käsud
+ * zpool list
+ * zfs get all
+ * zfs list
