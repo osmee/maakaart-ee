@@ -1,0 +1,9 @@
+ * vajalik on fuse source
+ * viimane zfs-fuse source http://zfs-fuse.net/
+ * vajalikud pakid: 
+ urpmi fuse fuse-devel lib64aio lib64aio-devel zlib-devel scons
+ * cd src
+ * scons 
+ * Et zfs-fuse tuleks bootimise ajal üles: 
+ cp cp ../contrib/zfs-fuse.initd /etc/init.d/
+ chkconfig --add zfs-fuse
