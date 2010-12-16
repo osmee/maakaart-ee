@@ -11,7 +11,7 @@
  * poolide loomine
 
 = Poolide loomine =
-2 pooli 1 baaso jaoks 2 tilede jaoks (storage)
+2 pooli 1 baasi jaoks 2 tilede jaoks (storage)
 
  * zpool create baas -m /storage /dev/sdc /dev/sdd
  * zfs set mountpoint=/storage/baas baas
