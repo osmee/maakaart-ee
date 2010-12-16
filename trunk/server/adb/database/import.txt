@@ -14,3 +14,4 @@ copy MA_KOMPONENDID from '/tmp/ADS_20100927/MA_KOMPONENDID.csv' with delimiter a
 
 copy ads_objtyybid from '/tmp/ads_objtyybid.txt' with delimiter as '\t' csv header;
 
+copy sihtnumbrid from '/tmp/sihtnumbrid-10-12-2010.csv' with delimiter ';' csv header;
