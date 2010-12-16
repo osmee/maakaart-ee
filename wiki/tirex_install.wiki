@@ -3,3 +3,5 @@
  svn co http://svn.openstreetmap.org/applications/utils/tirex/ tirex
  * Nõutavad pakid
  urpmi perl-IPC-ShareLite perl-JSON perl-GD perl-libwww-perl
+ * Build
+ make; make install
