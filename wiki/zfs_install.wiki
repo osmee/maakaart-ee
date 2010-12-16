@@ -1,9 +1,19 @@
+= ZFS install =
  * vajalik on fuse source
  * viimane zfs-fuse source http://zfs-fuse.net/
  * vajalikud pakid: 
  urpmi fuse fuse-devel lib64aio lib64aio-devel zlib-devel scons
  * cd src
- * scons 
+ * scons; scons install
  * Et zfs-fuse tuleks bootimise ajal üles: 
  cp cp ../contrib/zfs-fuse.initd /etc/init.d/
  chkconfig --add zfs-fuse
+ * käivita zfs-fuse 'zfs-fuse'
+ * poolide loomine
+
+= Poolide loomine =
+2 pooli 1 baaso jaoks 2 tilede jaoks (storage)
+
+ * zpool create baas /dev/sdc /dev/sdd
+ * zfs set mountpoint=/storage/baas baas
+ * zfs set dedup=off baas
