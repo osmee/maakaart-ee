@@ -1,8 +1,13 @@
 
 -- lisa aadressidele geom tüüpi veerg ja täida see sisuga
-SELECT AddGeometryColumn ('public','aadressid','viitepunkt',3301,'POINT',2);
-
+SELECT AddGeometryColumn ('aadressid','viitepunkt',3301,'POINT',2);
 update aadressid set viitepunkt = ST_SetSRID(ST_MakePoint(to_number(replace(viitepunkt_x,',','.'),'999999.99'),to_number(replace(viitepunkt_y,',','.'),'9999999.99')),3301);
+
+
+create table ma_objektid_geo as select * from ma_objektid;
+SELECT AddGeometryColumn('ma_objektid_geo','geom',3301,'POINT',2);
+update ma_objektid_geo set geom = ST_SetSRID(ST_MakePoint(to_number(replace(viitepunkt_x,',','.'),'999999.99'),to_number(replace(viitepunkt_y,',','.'),'9999999.99')),3301);
+
 
 -- määra aadressobkekti tüüp
 select substr(ads_oid, 1, 2) as type, * from aadress_objektid;
@@ -19,3 +24,34 @@ SELECT * FROM aadress_objektid,adob_aadressid,aadressid WHERE  aadress_objektid.
 SELECT * FROM aadress_objektid,adob_aadressid,aadressid WHERE  aadress_objektid.taisaadress LIKE '%Tartu%Kastani tn 16' and  aadress_objektid.adob_id=adob_aadressid.adob_id and adob_aadressid.adr_id=aadressid.adr_id
 
 SELECT aadressid.* FROM aadress_objektid,adob_aadressid,aadressid WHERE  aadress_objektid.ads_oid LIKE 'EE%' and  aadress_objektid.adob_id=adob_aadressid.adob_id and adob_aadressid.adr_id=aadressid.adr_id and viitepunkt && SetSRID('BOX3D(522397 6592349, 732858 6600729)'::box3d,3301) group by aadressid.adr_id,aadressid.koodaadress,aadressid.tase1_id,aadressid.tase2_id,aadressid.tase3_id,aadressid.tase4_id,aadressid.tase5_id,aadressid.tase6_id,aadressid.tase7_id,aadressid.tase8_id,aadressid.taisaadress,aadressid.lahiaadress,aadressid.viitepunkt_x,aadressid.viitepunkt_y,aadressid.olek,aadressid.aadr_tekst,aadressid.viitepunkt limit 10;
+
+-- aadressid struktueeritult:
+SELECT 
+  a.*, 
+  k1.nimetus as t1n, 
+  k2.nimetus as t2n, 
+  k3.nimetus as t3n, 
+  k4.nimetus as t4n, 
+  k5.nimetus as t5n, 
+  k6.nimetus as t6n, 
+  k7.nimetus as t7n, 
+  k8.nimetus as t8n
+FROM 
+  (select * from public.aadressid where olek = 'K') as a 
+  LEFT OUTER JOIN (select * from public.aadress_komponendid where tase=1) as k1 
+	ON (a.tase1_id=k1.komp_id)
+  LEFT OUTER JOIN (select * from public.aadress_komponendid where tase=2) as k2 
+	ON (a.tase2_id=k2.komp_id)
+  LEFT OUTER JOIN (select * from public.aadress_komponendid where tase=3) as k3 
+	ON (a.tase3_id=k3.komp_id)
+  LEFT OUTER JOIN (select * from public.aadress_komponendid where tase=4) as k4 
+	ON (a.tase4_id=k4.komp_id)
+  LEFT OUTER JOIN (select * from public.aadress_komponendid where tase=5) as k5 
+	ON (a.tase5_id=k5.komp_id)
+  LEFT OUTER JOIN (select * from public.aadress_komponendid where tase=6) as k6 
+	ON (a.tase6_id=k6.komp_id)
+  LEFT OUTER JOIN (select * from public.aadress_komponendid where tase=7) as k7 
+	ON (a.tase7_id=k7.komp_id)
+  LEFT OUTER JOIN (select * from public.aadress_komponendid where tase=8) as k8
+	ON (a.tase8_id=k8.komp_id)
+LIMIT 50;
