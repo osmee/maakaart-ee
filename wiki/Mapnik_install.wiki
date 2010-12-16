@@ -1,4 +1,5 @@
 =Intall=
+ _ Mandriva 2010.1 -e jaoks. 2011.0 -s urpmi mapnik mapnik-devel _
  * Mapniku sorts
  {{{
  svn co http://svn.mapnik.org/tags/release-0.7.1 mapnik
