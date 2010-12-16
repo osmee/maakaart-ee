@@ -2,12 +2,16 @@
 $debug=1;
 include_once("lest.php");
 include_once("config.php");
+include_once("sihtnumbrid.php");
 
 $MAX_RESULT_ROWS=10;
  $dbconn = pg_connect("host=$db_host dbname=$db_name user=$db_username password=$db_password")
 		or die('Could not connect: ' . pg_last_error());
 
-// /?bbox=left,bottom,right,top		
+// input formats: /aadressid.php?bbox=left,bottom,right,top - bounding box
+// või /aadressid.php?mk=78  -- maakond
+
+#die(sihtnumber("Tartumaa","Tartu","Akadeemia","1B",$dbconn));
 
 if (isset($_GET['bbox'])) {
   $bbox=$_GET["bbox"];
@@ -70,6 +74,21 @@ print '<osm version="0.6" generator="Maakaart.ee server">';
 $nid=-1;
 while (($line = pg_fetch_array($qdb, null, PGSQL_ASSOC))){
 
+// skip too general addresses
+// tänav on, aga majanumbrit mitte
+ if ($line["tase5"] && !$line["tase7"]){
+  continue;
+ }
+// ainult vald
+ if ($line["tase2"] && !($line["tase3"] || $line["tase5"])){
+  continue;
+ }
+// ainult maakond
+ if ($line["tase1"] && !$line["tase2"]){
+  continue;
+ }
+ 
+
 #  $ta = format($line["taisaadress"]);
 #  $la = format($line["lahiaadress"]);
   $x = $line["x"];
@@ -100,15 +119,28 @@ while (($line = pg_fetch_array($qdb, null, PGSQL_ASSOC))){
 		$tags.="<tag k='addr:city' v='".format_linn($line["tase2"])."'/>";
 	  if($line["tase1"]) // maakond
 		$tags.="<tag k='addr:province' v='".format_mk($line["tase1"])."'/>";
-		
+
+  	  $sihtnumber = sihtnumber(format_mk($line["tase1"]),format($line["tase2"]),format($line["tase3"]),format_tn($line["tase5"]),format($line["tase7"]),$dbconn);
+	  $tags.="<tag k='addr:postcode' v='$sihtnumber'/>";
+
+	$total++;
+		if(substr($sihtnumber,-1,1)=="*"){
+			$multi++;
+		}else if($sihtnumber>0){
+			print "+";
+			$ok++;
+		}else{
+			$nok++;
+		}
 	  $tags.="<tag k='addr:country' v='EE'/>";
-  
+	  $tags.="<tag k='source' v='ADS 12.2010, post.ee 12.2010'/>";
   
   print "<node id='$nid' lat='$lat' lon='$lon'>$tags</node>\n";
  $nid--;
 }
 print "</osm>";
 
+print "total=$total ; ok=$ok ; multi=$multi ; nok=$nok";
 
 // ************
 // spetsiifilised formaadimuutused
@@ -122,7 +154,9 @@ function format_mk($t){
 }
 
 function format_linn($t){
-  return format(str_replace(" linn","",$t));
+  $t = format(str_replace(" linn","",$t));
+  $t = str_replace("Tallinna","Tallinn",$t);
+  return $t;
 }
 
 function format($t){
