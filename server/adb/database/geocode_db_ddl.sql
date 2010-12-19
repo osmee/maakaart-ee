@@ -202,3 +202,13 @@ WITH (
 );
 ALTER TABLE sihtnumbrid OWNER TO jaakl;
 
+-- function to remove abc from number and convert to int
+CREATE OR REPLACE FUNCTION pc_chartoint(chartoconvert character varying)
+  RETURNS integer AS
+$BODY$
+SELECT CASE 
+  WHEN trim(both 'ABCDEFGHIJKLMNOPQRSTUVWZYX' from upper(CASE WHEN position('/' in $1)>0 THEN substring($1 from 1 for position('/' in $1)-1) ELSE $1 END)) SIMILAR TO '[0-9]+' 
+    THEN CAST(trim(both 'ABCDEFGHIJKLMNOPQRSTUVWZYX' from upper(CASE WHEN position('/' in $1)>0 THEN substring($1 from 1 for position('/' in $1)-1) ELSE $1 END)) AS integer) 
+ELSE NULL END;
+$BODY$
+  LANGUAGE 'sql' IMMUTABLE STRICT;

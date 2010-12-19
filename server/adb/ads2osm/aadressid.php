@@ -1,17 +1,27 @@
 <?php
+// võtab Aadressregistri (ADS) aadressid Postgresql 
+// baasist, väljastab OSM XML formaadis faili maakonna või bbox piirkonna kohta
+// lisab ka Eesti Posti sihtnumbrid 
+
+// 2010 Jaak Laineste jaak.laineste-at-gmail.com
+// Kasutamine GPL litsentsitingimuste kohaselt
+
 $debug=1;
 include_once("lest.php");
 include_once("config.php");
 include_once("sihtnumbrid.php");
+include_once("aprint.php");
 
 $MAX_RESULT_ROWS=10;
  $dbconn = pg_connect("host=$db_host dbname=$db_name user=$db_username password=$db_password")
 		or die('Could not connect: ' . pg_last_error());
 
 // input formats: /aadressid.php?bbox=left,bottom,right,top - bounding box
-// v�i /aadressid.php?mk=78  -- maakond
+// või /aadressid.php?mk=78  -- maakond
 
 #die(sihtnumber("Tartumaa","Tartu","Akadeemia","1B",$dbconn));
+#die(sihtnumber(format_mk("Harju maakond"),format_linn2("Saue linn"),format(""),format_tn("Rauna põik"),format("13"),$dbconn));
+#die(sihtnumber(format_mk("Harju maakond"),format_linn2("Tallinna linn"),format("Kesklinna linnaosa"),format_tn("Narva mnt"),format("28"),$dbconn));
 
 if (isset($_GET['bbox'])) {
   $bbox=$_GET["bbox"];
@@ -72,14 +82,15 @@ FROM
 print "<?xml version='1.0' encoding='UTF-8'?>";
 print '<osm version="0.6" generator="Maakaart.ee server">';
 $nid=-1;
+  $multi=0; $nok=0;$ok=0;$total=0;
+
 while (($line = pg_fetch_array($qdb, null, PGSQL_ASSOC))){
 
-// skip too general addresses
-// t�nav on, aga majanumbrit mitte
+// tänav on, aga majanumbrit mitte
  if ($line["tase5"] && !$line["tase7"]){
   continue;
  }
-// ainult vald
+// ainult vald/linn, pole asulat ega tänavat
  if ($line["tase2"] && !($line["tase3"] || $line["tase5"])){
   continue;
  }
@@ -87,6 +98,13 @@ while (($line = pg_fetch_array($qdb, null, PGSQL_ASSOC))){
  if ($line["tase1"] && !$line["tase2"]){
   continue;
  }
+ 
+// puudulikud aadressid, tänavat pole antud, on tase6 all tänavanimi. Majanumbrita tänavakrundid jms sodi
+ if ($line["tase2"] && !$line["tase5"] && substr($line["tase3"],-8)=="linnaosa"){
+ // print "<br/>SKIP:".aprint($line);
+  continue;
+ }
+
  
 
 #  $ta = format($line["taisaadress"]);
@@ -96,8 +114,8 @@ while (($line = pg_fetch_array($qdb, null, PGSQL_ASSOC))){
   list($lon,$lat)=Est2Wgs($x,$y);
   $tags = "";
   foreach(array_keys($line) as $key){
-    if($line[$key] && $key!="viitepunkt"&& $key!="x"&& $key!="y"&& $key!="viitepunkt_x"&& $key!="viitepunkt_y"){
-	  $tags.="<tag k='ADS_$key' v='".format($line[$key])."'/>";
+    if($line[$key] && $key!="viitepunkt" && $key!="x" && $key!="y" && $key!="viitepunkt_x"&& $key!="viitepunkt_y"){
+	#  $tags.="<tag k='ADS_$key' v='".format($line[$key])."'/>";
 	}
   }
 	  if($line["tase8"])
@@ -111,7 +129,7 @@ while (($line = pg_fetch_array($qdb, null, PGSQL_ASSOC))){
 		$tags.="<tag k='addr:housename' v='".format($line["tase6"])."'/>";
 	  if($line["tase5"])
 		$tags.="<tag k='addr:street' v='".format_tn($line["tase5"])."'/>";
-	  if($line["tase4"]) // aiandus�histud jms kahtlased kohad
+	  if($line["tase4"]) // aiandusühistud jms kahtlased kohad
 		$tags.="<tag k='addr:street' v='".format_tn($line["tase4"])."'/>";
   	  if($line["tase3"])
 		$tags.="<tag k='addr:district' v='".format($line["tase3"])."'/>";
@@ -120,32 +138,64 @@ while (($line = pg_fetch_array($qdb, null, PGSQL_ASSOC))){
 	  if($line["tase1"]) // maakond
 		$tags.="<tag k='addr:province' v='".format_mk($line["tase1"])."'/>";
 
-  	  $sihtnumber = sihtnumber(format_mk($line["tase1"]),format($line["tase2"]),format($line["tase3"]),format_tn($line["tase5"]),format($line["tase7"]),$dbconn);
+  	  $sihtnumber = sihtnumber(format_mk($line["tase1"]),format_linn2($line["tase2"]),format($line["tase3"]),format_tn($line["tase5"]),format($line["tase7"]),$dbconn);
 	  $tags.="<tag k='addr:postcode' v='$sihtnumber'/>";
 
 	$total++;
-		if(substr($sihtnumber,-1,1)=="*"){
+		if(substr($sihtnumber,-1,1)=="?"){
 			$multi++;
 		}else if($sihtnumber>0){
-			print "+";
+		#	print "+";
 			$ok++;
 		}else{
+	//		print "<br/>sihtnumber(format_mk(".$line["tase1"]."),format_linn2(".$line["tase2"]."),format(".$line["tase3"]."),format_tn(".$line["tase5"]."),format(".$line["tase7"]."),dbconn)";
 			$nok++;
 		}
 	  $tags.="<tag k='addr:country' v='EE'/>";
 	  $tags.="<tag k='source' v='ADS 12.2010, post.ee 12.2010'/>";
-  
+#  if($multi>100)
+#   exit;
   print "<node id='$nid' lat='$lat' lon='$lon'>$tags</node>\n";
  $nid--;
 }
 print "</osm>";
 
-print "total=$total ; ok=$ok ; multi=$multi ; nok=$nok";
+print "<br/>total=$total ; ok=$ok ; multi=$multi ; nok=$nok";
 
 // ************
 // spetsiifilised formaadimuutused
 function format_tn($t){
-  return format(str_replace(" tn","",$t));
+  $t=format(str_replace(" tn","",$t));
+  // lühenda isikunimega tänavad "Jaan Koorti" -> "J. Koorti"; Karl August Hermanni -> "K. A. Hermanni"
+  $lastname="";
+  if(str_word_count($t)>1){
+	$words=split(" ",$t);
+    $newname=array();
+	for($i=sizeof($words)-1;$i>=0;$i--){ // tagant-ette kõik sõnad
+	 # print "sub1:".(substr($words[$i],0,1));
+	  if ((substr($words[$i],0,1)==strtoupper(substr($words[$i],0,1))) && !$lastname){ // kui on suurtäht ja enne pole olnud perenime, siis ilmselt on perenimi
+ 	    $lastname=$words[$i];
+		$newname[$i]=$lastname;
+	#	print "last:".$lastname;
+	  }else{
+	   if(substr($words[$i],0,1)==strtoupper(substr($words[$i],0,1)) && $lastname){ 
+	    // on leitud perenimi, ja ikka algab suurega, siis järelikult eesnimi mida lühenda armutult
+		 if($words[$i]=="Friedrich"){ // erand(id) laulutaadile
+			$newname[$i]="Fr.";
+		   }else{
+			$newname[$i]=strtoupper(substr($words[$i],0,1)).".";
+			}
+	   }else{
+	    // mistahes muu sõna nimes
+	    $newname[$i]=$words[$i];
+	   }
+	  }
+#	  print_r($newname);
+	} // for
+  ksort($newname);
+  return implode($newname," ");
+  } // if multiwords
+  return $t;
 }
 
 
@@ -158,6 +208,12 @@ function format_linn($t){
   $t = str_replace("Tallinna","Tallinn",$t);
   return $t;
 }
+
+function format_linn2($t){ // indeksi jaoks
+  $t = str_replace("Tallinna","Tallinn",$t);
+  return $t;
+}
+
 
 function format($t){
  return htmlspecialchars($t,ENT_QUOTES);
