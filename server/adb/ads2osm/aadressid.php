@@ -56,7 +56,7 @@ $query="SELECT
   k7.nimetus as tase7, 
   k8.nimetus as tase8
 FROM 
-  (select * from public.aadressid where olek = 'K' AND $mk viitepunkt && SetSRID('BOX3D($x1 $y1,$x2 $y2)'::box3d,3301)) as a 
+  (select * from public.aadressid where olek = 'K' AND (tase6_id>0 or tase7_id>0) AND $mk viitepunkt && SetSRID('BOX3D($x1 $y1,$x2 $y2)'::box3d,3301)) as a 
   LEFT OUTER JOIN (select * from public.aadress_komponendid where tase=1) as k1 
 	ON (a.tase1_id=k1.komp_id)
   LEFT OUTER JOIN (select * from public.aadress_komponendid where tase=2) as k2 
@@ -86,6 +86,12 @@ $nid=-1;
 
 while (($line = pg_fetch_array($qdb, null, PGSQL_ASSOC))){
 
+
+if(!housenameok($line["tase6"])){
+ continue;
+}
+
+// tegelikult peaks juba päringust kõik välja jääma millel pole majanumbrit või majanime
 // tänav on, aga majanumbrit mitte
  if ($line["tase5"] && !$line["tase7"]){
   continue;
@@ -98,6 +104,12 @@ while (($line = pg_fetch_array($qdb, null, PGSQL_ASSOC))){
  if ($line["tase1"] && !$line["tase2"]){
   continue;
  }
+
+// ainult küla
+ if ($line["tase3"] && !($line["tase5"] || $line["tase6"] || $line["tase7"]) ){
+  continue;
+ }
+ 
  
 // puudulikud aadressid, tänavat pole antud, on tase6 all tänavanimi. Majanumbrita tänavakrundid jms sodi
  if ($line["tase2"] && !$line["tase5"] && substr($line["tase3"],-8)=="linnaosa"){
@@ -128,9 +140,9 @@ while (($line = pg_fetch_array($qdb, null, PGSQL_ASSOC))){
 	  if($line["tase6"])
 		$tags.="<tag k='addr:housename' v='".format($line["tase6"])."'/>";
 	  if($line["tase5"])
-		$tags.="<tag k='addr:street' v='".format_tn($line["tase5"])."'/>";
+		$tags.="<tag k='addr:street' v='".format_tn2($line["tase5"])."'/>";
 	  if($line["tase4"]) // aiandusühistud jms kahtlased kohad
-		$tags.="<tag k='addr:street' v='".format_tn($line["tase4"])."'/>";
+		$tags.="<tag k='addr:street' v='".format_tn2($line["tase4"])."'/>";
   	  if($line["tase3"])
 		$tags.="<tag k='addr:district' v='".format($line["tase3"])."'/>";
  	  if($line["tase2"])
@@ -139,13 +151,14 @@ while (($line = pg_fetch_array($qdb, null, PGSQL_ASSOC))){
 		$tags.="<tag k='addr:province' v='".format_mk($line["tase1"])."'/>";
 
   	  $sihtnumber = sihtnumber(format_mk($line["tase1"]),format_linn2($line["tase2"]),format($line["tase3"]),format_tn($line["tase5"]),format($line["tase7"]),$dbconn);
-	  $tags.="<tag k='addr:postcode' v='$sihtnumber'/>";
 
 	$total++;
 		if(substr($sihtnumber,-1,1)=="?"){
 			$multi++;
-		}else if($sihtnumber>0){
+			$tags.="<tag k='addr:postcode' v='$sihtnumber'/>";
+			}else if($sihtnumber>0){
 		#	print "+";
+			$tags.="<tag k='addr:postcode' v='$sihtnumber'/>";
 			$ok++;
 		}else{
 	//		print "<br/>sihtnumber(format_mk(".$line["tase1"]."),format_linn2(".$line["tase2"]."),format(".$line["tase3"]."),format_tn(".$line["tase5"]."),format(".$line["tase7"]."),dbconn)";
@@ -160,10 +173,11 @@ while (($line = pg_fetch_array($qdb, null, PGSQL_ASSOC))){
 }
 print "</osm>";
 
-print "<br/>total=$total ; ok=$ok ; multi=$multi ; nok=$nok";
+#print "<br/>total=$total ; ok=$ok ; multi=$multi ; nok=$nok";
 
 // ************
 // spetsiifilised formaadimuutused
+// tänavanimi eesnime lühendamisega
 function format_tn($t){
   $t=format(str_replace(" tn","",$t));
   // lühenda isikunimega tänavad "Jaan Koorti" -> "J. Koorti"; Karl August Hermanni -> "K. A. Hermanni"
@@ -198,6 +212,12 @@ function format_tn($t){
   return $t;
 }
 
+// tänavanimi ilma eesnime lühendamiseta
+function format_tn2($t){
+  $t=format(str_replace(" tn","",$t));
+  return $t;
+}
+
 
 function format_mk($t){
   return format(str_replace(" maakond","maa",$t));
@@ -217,6 +237,92 @@ function format_linn2($t){ // indeksi jaoks
 
 function format($t){
  return htmlspecialchars($t,ENT_QUOTES);
+}
+
+function housenameok($n){
+
+$noends=array(
+	"järv",
+	"laht",
+	"põld",
+	"kraav",
+	"karjäär",
+	"punkt",
+	"sõlm",
+	"rand",
+	"tulepaagi",
+	"tulepaak",
+	"tuletorn",
+    "karjäär",
+    "raba",
+	"km",
+	"külavahe",
+	"põik",
+    "jaam"
+	);
+
+$nowords=array(
+ "Parkla",
+ "maantee",
+ "mnt",
+ "raudtee",
+ "kõnnitee",
+ "ristmik",
+ "alajaam",
+ "pumbajaam",
+ "puurkaev",
+ "tugijaam",
+ "trafo",
+ "Maaüksus",
+ "Töökoja",
+ " plats",
+ "OÜ",
+ "AS",
+ "kergliiklustee",
+ "tankla",
+ "bensiinijaam",
+ "kauplus",
+ "haigla",
+ "veemõõdupost",
+ "garaa",
+ "Garaa",
+ "puhasti",
+ "metskond",
+ "metskonna",
+ "maatükk",
+ "parkla",
+ "tänav",
+ "üldmaa",
+ " tee",
+ " tn",
+ "tee ",
+ "päevamärk",
+ "radarmast",
+ "üldmaa",
+ "tootmisala",
+ "T-",
+ 	"T1",
+	"T2",
+	"T3",
+	"T4",
+	"T5",
+	"T6",
+	"T7",
+	"T8",
+	"T9",
+ );
+ 
+foreach($noends as $end){
+ if(substr($n,0-strlen($end))==$end)
+   return false;
+ } 
+
+foreach($nowords as $word){
+  if(strpos($n,$word)!==false)
+   return false;
+ }
+ 
+ return true;
 }
 
 ?>
