@@ -15,7 +15,9 @@
     </style>
 
 <!--    <script src="http://openlayers.org/api/OpenLayers.js"></script>-->
-    <script src="http://dev.openlayers.org/nightly/OpenLayers.js"></script>
+<!--    <script src="http://dev.openlayers.org/nightly/OpenLayers.js"></script>-->
+    <script src="lib/OpenLayers.js"></script>
+
 
   <script type="text/javascript">
         var lon = -0.5;
@@ -97,13 +99,13 @@
             );
 //            var gmap = new OpenLayers.Layer.Google("Google", {sphericalMercator:true});
 
-            map.addLayers([generate, mapnik, cyclemap]);
+            map.addLayers([generate, mapnikmod,mapnik, cyclemap]);
 
             map.addControl(new OpenLayers.Control.LayerSwitcher());
 
             map.zoomToExtent(
                 new OpenLayers.Bounds(
-                    -1, 51, 0, 52
+                    -160, -80, 160, 80
                 ).transform(map.displayProjection, map.projection)
             );
         }
