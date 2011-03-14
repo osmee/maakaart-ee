@@ -1,0 +1,9 @@
+#summary Arendusplaan
+
+  # openstreetbrowser (rails_port) install - st maakaart.ee avavaateks saab sarnane leht nagu openstreetbrowser.org
+  # Nominatim (aadressiotsinguks) install
+  # Nominatim täiendamine, et töötaks koos Maa-ameti andmetega. Eestispetsiifilised tõlked ja täiendused
+  # Enda Wiki-lehe (mediawiki abil) install - sinna kolib praegune maakaart.ee sisu (juhendid, uudised jms)
+  # maakaart.ee/OpenTransit teekonnaotsingu UI tasemel integreerimine  (üldise kujunduse muutmine selleks ilmselt vajalik). Opentransit API kasutamine JSON-päringutena ja uus kerge frontend teha selle abil (saab kasutada opentripplanneri olemasolevat kliendipoolset Javascripti).
+  # teemakaardid: matkarajad,rmk kohad jms. Kihte peaks saama valida lihtsamalt kui OpenLayersi standardvahendiga. Vajalik selleks kujunduse täiendamine. Teemakaarte saab defineerida vaid haldaja (st see võib olla keerukas/vajada väikest skriptimist), kasutamine/vaatamine peab olema lihtne. Sisuliselt lahendabki selle openstreetbrowser.
+  # teemakaardi objektid on klikitavad (vektorkiht, openlayers vahendiga, serveris päring postgis baasi). 
