@@ -1,6 +1,7 @@
 #summary Arendusplaan
 
-  # openstreetbrowser (rails_port) install - st maakaart.ee avavaateks saab sarnane leht nagu openstreetbrowser.org
+  # openstreetbrowser install - st maakaart.ee avavaateks saab sarnane leht nagu openstreetbrowser.org (LAMP teenus)
+  # OSM API (nn rails_port, RoR) ja OSM XAPI install
   # Nominatim (aadressiotsinguks) install
   # Nominatim täiendamine, et töötaks koos Maa-ameti andmetega. Eestispetsiifilised tõlked ja täiendused
   # Enda Wiki-lehe (mediawiki abil) install - sinna kolib praegune maakaart.ee sisu (juhendid, uudised jms)
