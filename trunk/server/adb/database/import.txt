@@ -1,7 +1,18 @@
 psql ads
 @geocode_db_ddl.sql
 
+
+## uuenduseks vajalikud käsud:
+
 \encoding ISO_8859-4
+truncate AADRESSID;
+truncate AADRESS_KOMPONENDID;
+truncate  AADRESS_OBJEKTID ;
+truncate  ADKOMP_SYNONYYMID;
+truncate  ADOB_AADRESSID; 
+truncate  MA_OBJEKTID  ;
+truncate  MA_KOMPONENDID; 
+alter table aadressid drop viitepunkt;
 
 copy AADRESSID from '/tmp/ADS_20100927/AADRESSID.csv' with delimiter as '\t' csv null as '' header;
 copy AADRESS_KOMPONENDID from '/tmp/ADS_20100927/AADRESS_KOMPONENDID.csv' with delimiter as '\t' csv null as '' header;
@@ -11,6 +22,7 @@ copy ADOB_AADRESSID from '/tmp/ADS_20100927/ADOB_AADRESSID.csv' with delimiter a
 copy MA_OBJEKTID from '/tmp/ADS_20100927/MA_OBJEKTID.csv' with delimiter as '\t' csv null as '' header;
 copy MA_KOMPONENDID from '/tmp/ADS_20100927/MA_KOMPONENDID.csv' with delimiter as '\t' csv null as '' header;
 
+# allolevaid pole tavaliselt vaja
 
 copy ads_objtyybid from '/tmp/ads_objtyybid.txt' with delimiter as '\t' csv header;
 
