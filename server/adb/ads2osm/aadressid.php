@@ -7,6 +7,9 @@
 // Kasutamine GPL litsentsitingimuste kohaselt
 
 $debug=1;
+$skip_sihtnumber=TRUE;
+$source = "Maaamet ADS 12.2010"; // attribution for each node
+
 include_once("lest.php");
 include_once("config.php");
 include_once("sihtnumbrid.php");
@@ -36,6 +39,12 @@ if (isset($_GET['mk'])) {
   $mk="1=1 and ";
  }
 
+if (isset($_GET['ov'])) {
+  $ov="tase2_id = '".$_GET["ov"]."' and ";
+}else{
+  $ov="1=1 and ";
+ }
+
  
 list($left,$bottom,$right,$top)=split(",",$bbox);
 
@@ -56,7 +65,7 @@ $query="SELECT
   k7.nimetus as tase7, 
   k8.nimetus as tase8
 FROM 
-  (select * from public.aadressid where olek = 'K' AND (tase6_id>0 or tase7_id>0) AND $mk viitepunkt && SetSRID('BOX3D($x1 $y1,$x2 $y2)'::box3d,3301)) as a 
+  (select * from public.aadressid where olek = 'K' AND (tase6_id>0 or tase7_id>0) AND $mk $ov viitepunkt && SetSRID('BOX3D($x1 $y1,$x2 $y2)'::box3d,3301)) as a 
   LEFT OUTER JOIN (select * from public.aadress_komponendid where tase=1) as k1 
 	ON (a.tase1_id=k1.komp_id)
   LEFT OUTER JOIN (select * from public.aadress_komponendid where tase=2) as k2 
@@ -150,6 +159,7 @@ if(!housenameok($line["tase6"])){
 	  if($line["tase1"]) // maakond
 		$tags.="<tag k='addr:province' v='".format_mk($line["tase1"])."'/>";
 
+if(!$skip_sihtnumber){
   	  $sihtnumber = sihtnumber(format_mk($line["tase1"]),format_linn2($line["tase2"]),format($line["tase3"]),format_tn($line["tase5"]),format($line["tase7"]),$dbconn);
 
 	$total++;
@@ -164,8 +174,10 @@ if(!housenameok($line["tase6"])){
 	//		print "<br/>sihtnumber(format_mk(".$line["tase1"]."),format_linn2(".$line["tase2"]."),format(".$line["tase3"]."),format_tn(".$line["tase5"]."),format(".$line["tase7"]."),dbconn)";
 			$nok++;
 		}
+	} // if sihtnumber
+
 	  $tags.="<tag k='addr:country' v='EE'/>";
-	  $tags.="<tag k='source' v='ADS 12.2010, post.ee 12.2010'/>";
+	  $tags.="<tag k='source' v='$source'/>";
 #  if($multi>100)
 #   exit;
   print "<node id='$nid' lat='$lat' lon='$lon'>$tags</node>\n";
@@ -264,6 +276,8 @@ $noends=array(
 $nowords=array(
  "Parkla",
  "maantee",
+ "laudatee",
+ "külatee",
  "mnt",
  "raudtee",
  "kõnnitee",
@@ -313,7 +327,7 @@ $nowords=array(
  );
  
 foreach($noends as $end){
- if(substr($n,0-strlen($end))==$end)
+ if(substr(trim($n),0-strlen($end))==$end)
    return false;
  } 
 
