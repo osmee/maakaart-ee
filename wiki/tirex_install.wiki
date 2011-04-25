@@ -18,8 +18,12 @@
 /var/run/tirex
 /var/lib/tirex
 /var/log/tirex
+/var/lib/mod_tile
 }}}
-
+ * Linkida kataloog
+{{{
+ln -s /var/lib/mod_tile /var/lib/tirex/tiles
+}}} 
  * /etc/tirex/tirex.conf
 {{{
 stats_dir=/var/lib/tirex/stats
