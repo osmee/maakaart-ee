@@ -26,36 +26,6 @@ if($vliik=="linn" || $liik=="linnaosa"){
 // kui majanr stiilis "70i/1", eemalda / tagune
 @list($maja,$spam)=split("/",$maja);
 
-// küla maal, tänavanime kontrolliga
-$query="select sihtnumber 
-	from sihtnumbrid 
-	where maakond = '$maakond' 
-		and vald = '$vald' 
-		and asula = '$asula'
-		and aadressiliik in ('küla')
-		and (
-			tanav = '$tanav' or (tanav='Kõik' and '$tanav'='')
-			)
-		and tanav not like '%postipunkt%'
-		and tanav not like '%postkontor%'
-	group by sihtnumber
-	";
-	//run2: ,'alevik','alev','asum','aiandusühistu' 
-#print "$query <br/>";
-#die();
-
- $qdb = pg_query($query) or die('Query failed: ' . pg_last_error());
-
-if (($line = pg_fetch_array($qdb, null, PGSQL_ASSOC))){
-	$m = pg_fetch_array($qdb, null, PGSQL_ASSOC)? " ?" : "";
-if($m){
- print "<br/>multi1 $query<br/>";
- print "<br/>1 mk=$maakond,vald=$vald,vliik=$vliik,asula=$asula,liik=$liik,tn=$tanav,maja=$maja ".$line["sihtnumber"];
- #print "*";
-}
-	return $line["sihtnumber"] . $m;
- }
-
  // linnas
 // ehk on täpne maja vaste olemas ?
 $query="select sihtnumber 
@@ -85,7 +55,7 @@ $query="select sihtnumber
 		and pc_chartoint('$maja')<=pc_chartoint(majalopp)
 		and 
 			mod(pc_chartoint(majaalgus),2)
-			= mod(pc_chartoint('$maja'),2);
+			= mod(pc_chartoint('$maja'),2)
 	";
 #print "$query <br/>";
 #die();
@@ -158,6 +128,35 @@ if (($line = pg_fetch_array($qdb, null, PGSQL_ASSOC))){
 	return $line["sihtnumber"];
  }
 
+// küla maal, tänavanime kontrolliga
+$query="select sihtnumber 
+	from sihtnumbrid 
+	where maakond = '$maakond' 
+		and vald = '$vald' 
+		and asula = '$asula'
+		and aadressiliik in ('küla')
+		and (
+			tanav = '$tanav' or (tanav='Kõik' and '$tanav'='')
+			)
+		and tanav not like '%postipunkt%'
+		and tanav not like '%postkontor%'
+	group by sihtnumber
+	";
+	//run2: ,'alevik','alev','asum','aiandusühistu' 
+#print "$query <br/>";
+#die();
+
+ $qdb = pg_query($query) or die('Query failed: ' . pg_last_error());
+
+if (($line = pg_fetch_array($qdb, null, PGSQL_ASSOC))){
+	$m = pg_fetch_array($qdb, null, PGSQL_ASSOC)? " ?" : "";
+if($m){
+ print "<br/>multi1 $query<br/>";
+ print "<br/>1 mk=$maakond,vald=$vald,vliik=$vliik,asula=$asula,liik=$liik,tn=$tanav,maja=$maja ".$line["sihtnumber"];
+ #print "*";
+}
+	return $line["sihtnumber"] . $m;
+ }
  
  // küla maal, tänavanime kontrollita
 $query="select sihtnumber 
@@ -165,7 +164,8 @@ $query="select sihtnumber
 	where maakond = '$maakond' 
 		and vald = '$vald' 
 		and asula = '$asula'
-		and aadressiliik in ('küla')
+		and aadressiliik ='$liik'
+		and aadressiliik in ('küla','alevik','alev','asum','aiandusühistu')
 		and tanav not like '%postipunkt%'
 		and tanav not like '%postkontor%'
 	group by sihtnumber
@@ -182,7 +182,8 @@ if($m){
 			where maakond = '$maakond' 
 				and vald = '$vald' 
 				and asula = '$asula'
-				and aadressiliik in ('küla')
+				and aadressiliik ='$liik'
+				and aadressiliik in ('küla','alevik','alev','asum','aiandusühistu')
 				and tanav = 'Kõik'
 			 group by sihtnumber
 			";
