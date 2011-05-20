@@ -1,6 +1,6 @@
 = estonia.style =
 
-Stiil osm2pgsql -le eesti andmete impordiks
+Stiil osm2pgsql -le eesti andmete impordiks. /var/lib/postgresql/estonia.style
 
 {{{
 # OsmType  Tag          DataType     Flags
