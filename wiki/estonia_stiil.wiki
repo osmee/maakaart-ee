@@ -9,7 +9,8 @@ node,way   source       text         delete   # This indicates that we shouldn't
 
 node,way   access       text         linear
 node,way   addr:housenumber    text  linear
-node,way   name:et      text    linear
+node,way   name:et      text    linear # Eestikeelsed nimed
+node,way   name:en      text    linear # Inglisekeelsed nimed, kui eestikeelset pole
 node,way   addr:interpolation  text  linear 
 node,way   admin_level  text         linear
 node,way   aerialway    text         linear
