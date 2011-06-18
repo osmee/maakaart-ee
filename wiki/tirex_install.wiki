@@ -22,7 +22,8 @@
 }}}
  * Linkida kataloog
 {{{
-ln -s /var/lib/mod_tile /var/lib/tirex/tiles
+ln -s /storage/tiles /var/lib/mod_tile
+ln -s /storage/tiles /var/lib/tirex/tiles
 }}} 
  * /etc/tirex/tirex.conf
 {{{
