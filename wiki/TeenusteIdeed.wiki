@@ -16,7 +16,7 @@ Siin on üldised ideed teenuste arenduseks. Üldine lähenemine oleks, et paneme
 ||OSM veast/puudusest lihtne teavitamine||openstreetbugs||kirjeldada,arendada||
 ||Lihtne kaardieksport Garmini jaoks||olemas mitmeid||installida,konfida||
 ||Teemakaartide valik||OpenLayers+web custom||arendada||
-||Lihtne teekonnaotsing (A->B)||[http://sourceforge.net/apps/trac/routed/ OSRM], Graphserver, pgrouting, http://opentripplanner.org/ ?||pgrouting balti andmetega olemas, lisa installida,konfida||
+||Lihtne teekonnaotsing (A->B)||[http://sourceforge.net/apps/trac/routed/ OSRM], Graphserver, pgrouting, http://opentripplanner.org/ ?||pgrouting balti andmetega olemas, lisa installida,konfida. Pandud üles http://maakaart.ee/opentransit/||
 ||Interaktiivsed (klikitavad) POI punktid kaardil||OpenLayers,web custom||arendada||
 ||Eri kaartide võrdleja||vt Geofabrik vahendit||installida,konfida||
 ||Punkti kohta info (Point-in-Polygon)||postgis baasile oma vahend||Olemas [http://193.40.61.100/~jaakl/pip/?lon=24.8415156163091&lat=59.4334641149756 prototüüp API], ootab täiendavaid nõuteid ||
