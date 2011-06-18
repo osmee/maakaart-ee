@@ -88,9 +88,9 @@ AddTileConfig   /tiles/mapnik mapnik
 </html>
 }}}
 = Run =
-Mitte root kasutajaga
+Mitte root kasutajaga (mapnik)
 {{{
-tirex-masater &
+tirex-master &
 }}}
 
 {{{
