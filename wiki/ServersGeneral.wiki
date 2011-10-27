@@ -31,7 +31,7 @@ imposm --write --optimize --deploy-production-tables -d osm -U postgres --proj e
 }}}
   * Täiendusideid: importida ka buildingud ja lisada kujundusse
 
-== MapServer ==
+== Mapserver ==
   * Installitud apt-get paketist
   * Konf */opt/mapserver* kataloogis
   * Binary on */usr/lib/cgi-bin* kaustas, apache oskab seda sealt leida
