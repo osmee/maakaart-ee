@@ -13,6 +13,8 @@
 == Bittorrent OSM Planet-ile ==
   * jookseb kasutaja jaakl screen-i sees käsuga. Skripti pole, käsitsi restartida korra nädalas et oleks uuem. Käsitsi kustutada vanad planet failid 
 {{{
+sudo su -u jaakl
+screen -RRD
 cd /home/jaakl
 rtorrent http://osm-torrent.torres.voyager.hr/files/planet-latest.osm.bz2.torrent -p 6881-6881
 }}}
