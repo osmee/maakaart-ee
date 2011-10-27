@@ -29,7 +29,7 @@ cd /storage/suur/osm
 export LD_LIBRARY_PATH=/opt/imposm/lib
 imposm --write --optimize --deploy-production-tables -d osm -U postgres --proj epsg:3857
 }}}
-  * Täiendusideid: importida ka buildingud ja lisada kujundusse
+  * Täiendusideid: importida ka buildingud ja lisada kujundusse. Eesti keele tag lisada
 
 == Mapserver ==
   * Installitud apt-get paketist
