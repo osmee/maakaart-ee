@@ -7,5 +7,13 @@
   # Juniperi ruuter/tulemüür live-serveri ees.
 
 = Tarkvara =
-  # vaata siinseid lehti
   # liveserveri üldjoonis: https://docs.google.com/drawings/d/1HGTn47iCXx4u17ZD3-FuSAXXMdwp4STH3OpoUr3ycr0/edit
+  # vaata detailse konfi osas siinseid wiki lehti
+
+== Bittorrent OSM Planet-ile ==
+  * jookseb kasutaja jaakl screen-i sees käsuga. Skripti pole, käsitsi restartida korra nädalas et oleks uuem. Käsitsi kustutada vanad planet failid 
+{{{
+cd /home/jaakl
+rtorrent http://osm-torrent.torres.voyager.hr/files/planet-latest.osm.bz2.torrent -p 6881-6881
+}}}
+  * Juniperis on selle jaoks suunatud 6881 port sisse
