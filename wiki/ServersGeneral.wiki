@@ -2,10 +2,11 @@
 
 = Serverid =
 
-# Live: kaart.maakaart.ee. 16G RAM, 4.5T ketast kokku, 8-core. Ubuntu 11.04 hetkel
-# Test: 193.40.61.100 4G RAM
-# Juniperi ruuter/tulemüür live-serveri ees.
+  # Live: kaart.maakaart.ee. 16G RAM, 4.5T ketast kokku, 8-core. Ubuntu 11.04 hetkel
+  # Test: 193.40.61.100 4G RAM
+  # Juniperi ruuter/tulemüür live-serveri ees.
 
 = Tarkvara =
-# vaata siinseid lehti
-# liveserveri üldjoonis: https://docs.google.com/drawings/d/1HGTn47iCXx4u17ZD3-FuSAXXMdwp4STH3OpoUr3ycr0/edit
+  # vaata siinseid lehti
+  # liveserveri üldjoonis: https://docs.google.com/drawings/d/1HGTn47iCXx4u17ZD3-
+FuSAXXMdwp4STH3OpoUr3ycr0/edit
