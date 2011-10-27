@@ -17,3 +17,24 @@ cd /home/jaakl
 rtorrent http://osm-torrent.torres.voyager.hr/files/planet-latest.osm.bz2.torrent -p 6881-6881
 }}}
   * Juniperis on selle jaoks suunatud 6881 port sisse
+
+== Imposm ==
+  * kasutatakse mapserveri poolt WMS-i APIs.
+  * kompileeritud sourcest */opt/imposm* kataloogis lähtudes http://wiki.osgeo.org/wiki/Benchmarking_2011/Imposm juhendist
+  * tekitab vahefailidena .cache failid, mis planeedi puhul võtavad kokku umbes 13GB. Nt kodukataloogis ei saa käivitada seetõttu
+  * vaikimisi konf impordib place kihis vaid name-tagi, seega eestikeelse jaoks on vaja impordikonfi modida (lisada "name:et") ja importida uuesti ning modida kujundusfaili (.map faili)
+  * käivitatud käsitsi (siin on ainult 2. faas, mis impordib .cache failid), käivitatud kasutaja _postgres_ alt. 
+{{{
+cd /storage/suur/osm
+export LD_LIBRARY_PATH=/opt/imposm/lib
+imposm --write --optimize --deploy-production-tables -d osm -U postgres --proj epsg:3857
+}}}
+  * Täiendusideid: importida ka buildingud ja lisada kujundusse
+
+== MapServer ==
+  * Installitud apt-get paketist
+  * Konf */opt/mapserver* kataloogis
+  * Binary on */usr/lib/cgi-bin* kaustas, apache oskab seda sealt leida
+  * URL wrapper /usr/lib/cgi-bin/wms on ise tehtud, see sisaldab viidet .map failile (kujundusega).
+  * avalik WMS URL: http://kaart.maakaart.ee/cgi-bin/wms
+  * Täiendusidee: installida mapproxy et teha seda oluliselt kiiremaks, ka madalate zoomide juures.
