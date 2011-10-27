@@ -1,0 +1,11 @@
+#summary Üldinfo meie serverite osas.
+
+= Serverid =
+
+1. Live: kaart.maakaart.ee. 16G RAM, 4.5T ketast kokku, 8-core. Ubuntu 11.04 hetkel
+2. Test: 193.40.61.100 4G RAM
+3. Juniperi ruuter/tulemüür live-serveri ees.
+
+= Tarkvara =
+1. vaata siinseid lehti
+2. liveserveri üldjoonis: https://docs.google.com/drawings/d/1HGTn47iCXx4u17ZD3-FuSAXXMdwp4STH3OpoUr3ycr0/edit
