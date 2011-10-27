@@ -8,5 +8,4 @@
 
 = Tarkvara =
   # vaata siinseid lehti
-  # liveserveri üldjoonis: https://docs.google.com/drawings/d/1HGTn47iCXx4u17ZD3-
-FuSAXXMdwp4STH3OpoUr3ycr0/edit
+  # liveserveri üldjoonis: https://docs.google.com/drawings/d/1HGTn47iCXx4u17ZD3-FuSAXXMdwp4STH3OpoUr3ycr0/edit
