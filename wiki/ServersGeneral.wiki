@@ -35,6 +35,6 @@ imposm --write --optimize --deploy-production-tables -d osm -U postgres --proj e
   * Installitud apt-get paketist
   * Konf */opt/mapserver* kataloogis
   * Binary on */usr/lib/cgi-bin* kaustas, apache oskab seda sealt leida
-  * URL wrapper /usr/lib/cgi-bin/wms on ise tehtud, see sisaldab viidet .map failile (kujundusega).
+  * URL wrapper */usr/lib/cgi-bin/wms* on ise lisatud, see sisaldab viidet .map failile (kujundusega).
   * avalik WMS URL: http://kaart.maakaart.ee/cgi-bin/wms
   * Täiendusidee: installida mapproxy et teha seda oluliselt kiiremaks, ka madalate zoomide juures.
