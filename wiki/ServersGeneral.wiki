@@ -42,7 +42,7 @@ imposm --write --optimize --deploy-production-tables -d osm -U postgres --proj e
   * Täiendusidee: installida mapproxy et teha seda oluliselt kiiremaks, ka madalate zoomide juures.
 
 == Mapproxy ==
-  * conf: /opt/mapproxy/ kataloogis. Konfitud lokaalset mapserveri WMS kasutama + katseks Maaameti WMS (ei pruugi toimida täielikult)
+  * conf: /opt/mapproxy/ kataloogis, vt MapProxyConf. Konfitud lokaalset mapserveri WMS kasutama + katseks Maaameti WMS (ei pruugi toimida täielikult)
   * Käivitatud screeni sees. 
 {{{
 sudo su -u jaakl
