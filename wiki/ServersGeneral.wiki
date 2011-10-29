@@ -38,5 +38,23 @@ imposm --write --optimize --deploy-production-tables -d osm -U postgres --proj e
   * Konf */opt/mapserver* kataloogis
   * Binary on */usr/lib/cgi-bin* kaustas, apache oskab seda sealt leida
   * URL wrapper */usr/lib/cgi-bin/wms* on ise lisatud, see sisaldab viidet .map failile (kujundusega).
-  * avalik WMS URL: http://kaart.maakaart.ee/cgi-bin/wms
+  * avalik WMS URL: http://kaart.maakaart.ee/cgi-bin/wms . NB! see on aeglane, avalikult kasutada tuleks Mapproxy URL-i.
   * Täiendusidee: installida mapproxy et teha seda oluliselt kiiremaks, ka madalate zoomide juures.
+
+== Mapproxy ==
+  * conf: /opt/mapproxy/ kataloogis. Konfitud lokaalset mapserveri WMS kasutama + katseks Maaameti WMS (ei pruugi toimida täielikult)
+  * Käivitatud screeni sees. 
+{{{
+sudo su -u jaakl
+screen -RRD
+cd /opt/mapproxy
+mapproxy-util serve-develop mapproxy.yaml
+}}}
+  * konfitud on ka seedfail mis madalamaid zoome pregenereerib cache sisse. Kasutamine:
+{{{
+cd /opt/mapproxy
+mapproxy-seed -f mapproxy.yaml -c 1 seed.yaml
+}}}
+  * Avalik OSM WMS URL: http://kaart.maakaart.ee/service/
+  * Avalik Maaameti ortopiltide tile url kasutamiseks Potlatch2 sees: http://kaart.maakaart.ee/tiles/1.0.0/maaamet_orto_EPSG900913/$z/$x/$y.jpeg?origin=nw
+  * *TODO* peaks tekitama korraliku automaatselt restardiga käivitatava teenuse
