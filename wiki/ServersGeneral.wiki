@@ -29,9 +29,24 @@ rtorrent http://osm-torrent.torres.voyager.hr/files/planet-latest.osm.bz2.torren
 {{{
 cd /storage/suur/osm
 export LD_LIBRARY_PATH=/opt/imposm/lib
-imposm --write --optimize --deploy-production-tables -d osm -U postgres --proj epsg:3857
+imposm --write --optimize --deploy-production-tables -d osm -U postgres --proj epsg:3857 -
 }}}
-  * Täiendusideid: importida ka buildingud ja lisada kujundusse. Eesti keele tag lisada
+  * Täiendatud impordi konfis, et eestikeelsed kohanimed oleksid ja hoonetel majanumbrid:
+{{{
+set_default_name_type(LocalizedName(['name:et', 'int_name', 'name:en', 'name']))
+
+buildings = Polygons(
+    name = 'buildings',
+    fields = (
+        ('addr:housenumber', String()),
+    ),
+    mapping = {
+        'building': (
+            '__any__',
+    )}
+)
+
+}}}
 
 == Mapserver ==
   * Installitud apt-get paketist
