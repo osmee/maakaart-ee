@@ -31,7 +31,7 @@ cd /storage/suur/osm
 export LD_LIBRARY_PATH=/opt/imposm/lib
 imposm --write --optimize --deploy-production-tables -d osm -U postgres --proj epsg:3857 -
 }}}
-  * Täiendatud impordi konfis, et eestikeelsed kohanimed oleksid ja hoonetel majanumbrid:
+  * Täiendatud impordi konfi (/storage/suur/osm/custommaping.py), et eestikeelsed kohanimed oleksid ja hoonetel majanumbrid:
 {{{
 set_default_name_type(LocalizedName(['name:et', 'int_name', 'name:en', 'name']))
 
