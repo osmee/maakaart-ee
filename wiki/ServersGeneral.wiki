@@ -70,7 +70,7 @@ mapproxy-util serve-develop mapproxy.yaml
         # mapproxy forward short URL-s
         RewriteEngine on
         RewriteRule   ^/service$  /osm/service [PT]
-        RewriteRule   ^/tiles$  /osm/tiles [PT]
+        RewriteRule   ^/tiles/(.*)$  /osm/tiles/$1 [PT]
 
         # tileproxy in wsgi
         WSGIScriptAlias /osm /opt/mapproxy/config.py
