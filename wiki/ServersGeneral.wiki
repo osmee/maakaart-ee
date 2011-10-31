@@ -58,13 +58,29 @@ buildings = Polygons(
 
 == Mapproxy ==
   * conf: /opt/mapproxy/ kataloogis, vt MapProxyConf. Konfitud lokaalset mapserveri WMS kasutama + katseks Maaameti WMS (ei pruugi toimida täielikult)
-  * Käivitatud screeni sees. 
+  * Testserveri käivitamine: 
 {{{
 sudo su -u jaakl
 screen -RRD
 cd /opt/mapproxy
 mapproxy-util serve-develop mapproxy.yaml
 }}}
+  * live conf Apache mod_wsgi abil, vastavalt mapproxy manuaalile deploytud. Apache konfis teenuse URL on /osm, aga töötab ka /service ja /tiles läbi URL rewrite:
+{{{
+        # mapproxy forward short URL-s
+        RewriteEngine on
+        RewriteRule   ^/service$  /osm/service [PT]
+        RewriteRule   ^/tiles$  /osm/tiles [PT]
+
+        # tileproxy in wsgi
+        WSGIScriptAlias /osm /opt/mapproxy/config.py
+
+        <Directory /opt/mapproxy/>
+                Order deny,allow
+                Allow from all
+        </Directory>
+}}}
+  * Live logid: */var/log/mapproxy* . Erroreid tasub otsida ka Apache error.log failist.
   * konfitud on ka seedfail mis madalamaid zoome pregenereerib cache sisse. Kasutamine:
 {{{
 cd /opt/mapproxy
@@ -75,4 +91,3 @@ mapproxy-seed -f mapproxy.yaml -c 1 seed.yaml
  {{{
 http://kaart.maakaart.ee/tiles/1.0.0/maaamet_orto_EPSG900913/$z/$x/$y.jpeg?origin=nw
 }}}
-  * *TODO* peaks tekitama korraliku automaatselt restardiga käivitatava teenuse
