@@ -86,7 +86,7 @@ mapproxy-util serve-develop mapproxy.yaml
 cd /opt/mapproxy
 mapproxy-seed -f mapproxy.yaml -c 1 seed.yaml
 }}}
-  * Avalik OSM WMS URL: http://kaart.maakaart.ee/service/
+  * Avalik OSM WMS URL: http://kaart.maakaart.ee/service
   * Avalik Maaameti ortopiltide tile url kasutamiseks Potlatch2 sees:
  {{{
 http://kaart.maakaart.ee/tiles/1.0.0/maaamet_orto_EPSG900913/$z/$x/$y.jpeg?origin=nw
