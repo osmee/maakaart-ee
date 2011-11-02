@@ -25,11 +25,11 @@ rtorrent http://osm-torrent.torres.voyager.hr/files/planet-latest.osm.bz2.torren
   * kompileeritud sourcest */opt/imposm* kataloogis lähtudes http://wiki.osgeo.org/wiki/Benchmarking_2011/Imposm juhendist
   * tekitab vahefailidena .cache failid, mis planeedi puhul võtavad kokku umbes 13GB. Nt kodukataloogis ei saa käivitada seetõttu
   * vaikimisi konf impordib place kihis vaid name-tagi, seega eestikeelse jaoks on vaja impordikonfi modida (lisada "name:et") ja importida uuesti ning modida kujundusfaili (.map faili)
-  * käivitatud käsitsi (siin on ainult 2. faas, mis impordib .cache failid), käivitatud kasutaja _postgres_ alt. 
+  * käivitatud jätgnev käivitatud kasutaja _postgres_ alt. See võttis aega ~9h lugemine, + ~29h baasi kirjutamine ja optimeerimine:
 {{{
 cd /storage/suur/osm
 export LD_LIBRARY_PATH=/opt/imposm/lib
-imposm --write --optimize --deploy-production-tables -d osm -U postgres --proj epsg:3857 -
+imposm --read --write --optimize --deploy-production-tables -d osm -U postgres --proj epsg:3857 -m custommapping.py -p 5433 -c 4 estonia.osm.gz
 }}}
   * Täiendatud impordi konfi (/storage/suur/osm/custommaping.py), et eestikeelsed kohanimed oleksid ja hoonetel majanumbrid:
 {{{
