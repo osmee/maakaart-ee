@@ -29,7 +29,7 @@ rtorrent http://osm-torrent.torres.voyager.hr/files/planet-latest.osm.bz2.torren
 {{{
 cd /storage/suur/osm
 export LD_LIBRARY_PATH=/opt/imposm/lib
-imposm --read --write --optimize --deploy-production-tables -d osm -U postgres --proj epsg:3857 -m custommapping.py -p 5433 -c 4 estonia.osm.gz
+imposm --read --write --optimize --deploy-production-tables -d osm -U postgres --proj epsg:3857 -m custommapping.py -p 5433 -c 4 /home/jaakl/planet-111026.osm.bz2
 }}}
   * Täiendatud impordi konfi (/storage/suur/osm/custommaping.py), et eestikeelsed kohanimed oleksid ja hoonetel majanumbrid:
 {{{
