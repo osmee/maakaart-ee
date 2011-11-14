@@ -2,7 +2,16 @@
 
 = Serverid =
 
-  # Live: kaart.maakaart.ee. 16G RAM, 4.5T ketast kokku, 8-core. Ubuntu 11.04 hetkel
+  # Live: kaart.maakaart.ee. 16G RAM, 4.5T ketast kokku, 8-core. Ubuntu 11.10 (viimane)
+   kettad:
+    a) 2x500GB SATA kettad, soft-RAID-1 (mirror)
+       / - 10GB
+       /home - 420G
+    b) 2x148 GB SAS ketast RAID-0 (stripe), soft-RAIDiga
+      /storage - kiire IO osm2pgsql baasi (ehk Mapnik) jaoks mõeldud
+    c) - 4x1.5GB, riistvara RAID-5 (?), 3TB saadaval
+      /suur  - kaardiandmete, tilede, muude baaside jms jaoks
+
   # Test: 193.40.61.100 4G RAM
   # Juniperi ruuter/tulemüür live-serveri ees.
 
