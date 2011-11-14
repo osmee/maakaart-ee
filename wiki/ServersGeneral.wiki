@@ -9,7 +9,7 @@
        /home - 420G
     b) 2x148 GB SAS ketast RAID-0 (stripe), soft-RAIDiga
       /storage - kiire IO osm2pgsql baasi (ehk Mapnik) jaoks mõeldud
-    c) - 4x1.5GB, riistvara RAID-5 (?), 3TB saadaval
+    c) - 4x1GB, riistvara RAID-5, 3TB saadaval
       /suur  - kaardiandmete, tilede, muude baaside jms jaoks
 
   # Test: 193.40.61.100 4G RAM
