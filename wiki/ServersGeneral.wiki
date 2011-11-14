@@ -88,7 +88,11 @@ buildings = Polygons(
   * Täiendusidee: installida mapproxy et teha seda oluliselt kiiremaks, ka madalate zoomide juures.
 
 == Mapproxy ==
-  * conf: /opt/mapproxy/ kataloogis, vt MapProxyConf. Konfitud lokaalset mapserveri WMS kasutama + katseks Maaameti WMS (ei pruugi toimida täielikult)
+  * conf: /opt/mapproxy/ kataloogis, vt MapProxyConf. Konfitud lokaalset mapserveri WMS kasutama + katseks Maaameti WMS (ei pruugi toimida täielikult). Tilede jaoks kataloog:
+{{{
+sudo mkdir /suur/mapproxy_cache
+sudo chmod a+w /suur/mapproxy_cache
+}}}
   * Testserveri käivitamine: 
 {{{
 sudo su -u jaakl
