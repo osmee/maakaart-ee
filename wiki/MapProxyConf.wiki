@@ -151,9 +151,9 @@ globals:
   # # cache options
   cache:
     # where to store the cached images
-    base_dir: '/storage/suur/mapproxy_cache'
+    base_dir: '/suur/mapproxy_cache'
     # where to store lockfiles
-    lock_dir: '/storage/suur/mapproxy_cache/locks'
+    lock_dir: '/suur/mapproxy_cache/locks'
   #   # request x*y tiles in one step
   #   meta_size: [4, 4]
   #   # add a buffer on all sides (in pixel) when requesting
