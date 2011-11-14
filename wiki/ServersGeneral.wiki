@@ -48,12 +48,24 @@ psql -d osm -p 5433  -h localhost -f /usr/share/postgresql/contrib/postgis-1.5/s
 {{{
 cd /home/jaakl/imposm_data
 export LD_LIBRARY_PATH=/opt/imposm/lib
-imposm --read --write --optimize --deploy-production-tables -d osm -U postgres --proj epsg:3857 -m ../custommapping.py -p 5433 -c 4 /home/jaakl/planet-111026.osm.bz2
+imposm --read --write --optimize --deploy-production-tables -d osm -m ../custommapping.py -p 5433 -c 4 /home/jaakl/planet-111026.osm.bz2
 }}}
-  * Täiendatud impordi konfi (/storage/suur/osm/custommaping.py), et eestikeelsed kohanimed oleksid ja hoonetel majanumbrid:
+  * Täiendatud impordi konfi (/home/jaakl/custommaping.py), et eestikeelsed kohanimed oleksid ja hoonetel majanumbrid, ning andmebaasiühendused:
 {{{
-set_default_name_type(LocalizedName(['name:et', 'int_name', 'name:en', 'name']))
+db_conf = Options(
+    # db='osm',
+    host='localhost',
+    port=5433,
+    user='postgres',
+    password='',
+    sslmode='allow',
+    prefix='osm_new_',
+    proj='epsg:3857',
+)
 
+...
+set_default_name_type(LocalizedName(['name:et', 'int_name', 'name:en', 'name']))
+...
 buildings = Polygons(
     name = 'buildings',
     fields = (
