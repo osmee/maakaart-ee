@@ -81,7 +81,7 @@ buildings = Polygons(
 
 == Mapserver ==
   * Installitud apt-get paketist
-  * Konf */opt/mapserver* kataloogis
+  * Konf */opt/mapserver* kataloogis, kujundus */opt/mapserver/osm-google-test.map*
   * Binary on */usr/lib/cgi-bin* kaustas, apache oskab seda sealt leida
   * URL wrapper */usr/lib/cgi-bin/wms* on ise lisatud, see sisaldab viidet .map failile (kujundusega).
   * avalik WMS URL: http://kaart.maakaart.ee/cgi-bin/wms . NB! see on aeglane, avalikult kasutada tuleks Mapproxy URL-i.
