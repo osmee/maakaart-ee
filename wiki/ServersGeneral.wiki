@@ -46,9 +46,9 @@ psql -d osm -p 5433  -h localhost -f /usr/share/postgresql/contrib/postgis-1.5/s
 }}}
   * käivitatud järgnev käivitatud kasutaja _postgres_ alt. See võttis aega ~9h lugemine, + ~29h baasi kirjutamine ja optimeerimine:
 {{{
-cd /storage/suur/osm
+cd /home/jaakl/imposm_data
 export LD_LIBRARY_PATH=/opt/imposm/lib
-imposm --read --write --optimize --deploy-production-tables -d osm -U postgres --proj epsg:3857 -m custommapping.py -p 5433 -c 4 /home/jaakl/planet-111026.osm.bz2
+imposm --read --write --optimize --deploy-production-tables -d osm -U postgres --proj epsg:3857 -m ../custommapping.py -p 5433 -c 4 /home/jaakl/planet-111026.osm.bz2
 }}}
   * Täiendatud impordi konfi (/storage/suur/osm/custommaping.py), et eestikeelsed kohanimed oleksid ja hoonetel majanumbrid:
 {{{
