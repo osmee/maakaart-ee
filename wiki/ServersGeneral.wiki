@@ -39,7 +39,7 @@ nano /suur/imposmdata/postgresql.conf
  autovacuum = off
 
 postgres -D /suur/imposmdata/
-pg_ctl start -D /storage/suur/data/
+pg_ctl start -D /suur/imposmdata/
 createdb osm -p 5433 -h localhost
 psql -d osm -p 5433  -h localhost -f /usr/share/postgresql/contrib/postgis-1.5/postgis.sql
 psql -d osm -p 5433  -h localhost -f /usr/share/postgresql/contrib/postgis-1.5/spatial_ref_sys.sql
