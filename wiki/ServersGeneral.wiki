@@ -88,8 +88,17 @@ buildings = Polygons(
 
 }}}
 
+  * Õigused www-data kasutajale baasist andmeid pärida:
+{{{
+sudo -u postgres psql -p 5433 osm
+psql (9.0.3, server 9.0.2)
+Type "help" for help.
+osm=# GRANT SELECT ON ALL TABLES IN SCHEMA public TO "www-data";
+GRANT
+osm=# \q
+}}}
 == Mapserver ==
-  * Installitud apt-get paketist
+  * Installitud *sudo apt-get install cgi-mapserver*
   * Konf */opt/mapserver* kataloogis, kujundus */opt/mapserver/osm-google-test.map*
   * Binary on */usr/lib/cgi-bin* kaustas, apache oskab seda sealt leida
   * URL wrapper */usr/lib/cgi-bin/wms* on ise lisatud, see sisaldab viidet .map failile (kujundusega).
