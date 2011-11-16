@@ -135,9 +135,8 @@ mapproxy-util serve-develop mapproxy.yaml
   * Live logid: */var/log/mapproxy* . Erroreid tasub otsida ka Apache error.log failist.
   * konfitud on ka seedfail mis madalamaid zoome pregenereerib cache sisse. Kasutamine:
 {{{
-sudo chmod -R a+w /suur/mapproxy_cache
 cd /opt/mapproxy
-mapproxy-seed -f mapproxy.yaml -c 1 seed.yaml
+sudo -u www-data mapproxy-seed -f mapproxy.yaml -c 1 seed.yaml
 }}}
   * Avalik OSM WMS URL: http://kaart.maakaart.ee/service
   * Avalik Maaameti ortopiltide tile url kasutamiseks Potlatch2 sees:
