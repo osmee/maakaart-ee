@@ -46,7 +46,7 @@ nano /suur/imposmdata/postgresql.conf
  checkpoint_segments = 20
  maintenance_work_mem = 256MB # 256000 for 8.1 and earlier
  autovacuum = off
-
+ unix_socket_directory = '/tmp'
 postgres -D /suur/imposmdata/
 pg_ctl start -D /suur/imposmdata/
 createdb osm -p 5433 -h localhost
