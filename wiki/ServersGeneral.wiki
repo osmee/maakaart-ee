@@ -36,8 +36,8 @@ rtorrent http://osm-torrent.torres.voyager.hr/files/planet-latest.osm.bz2.torren
   * vaikimisi konf impordib place kihis vaid name-tagi, seega eestikeelse jaoks on vaja impordikonfi modida (lisada "name:et") ja importida uuesti ning modida kujundusfaili (.map faili)
   * loo ja käivita andmebaas:
 {{{
-sudo mkdir /suur/imposmdata/
-sudo chown postgres /suur/imposmdata/
+sudo mkdir /storage/imposmdb
+sudo chown postgres /storage/imposmdb
 sudo su postgres
 initdb -D /storage/imposmdb/
 nano /storage/imposmdb/postgresql.conf
