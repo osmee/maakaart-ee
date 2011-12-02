@@ -39,32 +39,32 @@ rtorrent http://osm-torrent.torres.voyager.hr/files/planet-latest.osm.bz2.torren
 sudo mkdir /suur/imposmdata/
 sudo chown postgres /suur/imposmdata/
 sudo su postgres
-initdb -D /suur/imposmdata/
-nano /suur/imposmdata/postgresql.conf
- port = 5433
+initdb -D /storage/imposmdb/
+nano /storage/imposmdb/postgresql.conf
+ port = 5432
  shared_buffers = 128MB # 16384 for 8.1 and earlier
  checkpoint_segments = 20
  maintenance_work_mem = 256MB # 256000 for 8.1 and earlier
  autovacuum = off
  unix_socket_directory = '/tmp'
-postgres -D /suur/imposmdata/
-pg_ctl start -D /suur/imposmdata/
-createdb osm -p 5433 -h localhost
-psql -d osm -p 5433  -h localhost -f /usr/share/postgresql/contrib/postgis-1.5/postgis.sql
-psql -d osm -p 5433  -h localhost -f /usr/share/postgresql/contrib/postgis-1.5/spatial_ref_sys.sql
+postgres -D /storage/imposmdb/
+pg_ctl start -D /storage/imposmdb/
+createdb osm -p 5432 -h localhost
+psql -d osm -p 5432  -h localhost -f /usr/share/postgresql/contrib/postgis-1.5/postgis.sql
+psql -d osm -p 5432  -h localhost -f /usr/share/postgresql/contrib/postgis-1.5/spatial_ref_sys.sql
 }}}
   * käivitatud järgnev käivitatud kasutaja _postgres_ alt. See võttis aega ~9h lugemine, + ~29h baasi kirjutamine ja optimeerimine:
 {{{
 cd /home/jaakl/imposm_data
 export LD_LIBRARY_PATH=/opt/imposm/lib
-imposm --read --write --optimize --deploy-production-tables -d osm -m ../custommapping.py -p 5433 -c 4 /home/jaakl/planet-111026.osm.bz2
+imposm --read --write --optimize --deploy-production-tables -d osm -m ../custommapping.py -p 5432 -c 4 /home/jaakl/planet-111123.osm.bz2
 }}}
   * Täiendatud impordi konfi (/home/jaakl/custommaping.py), et eestikeelsed kohanimed oleksid ja hoonetel majanumbrid, ning andmebaasiühendused:
 {{{
 db_conf = Options(
     # db='osm',
     host='localhost',
-    port=5433,
+    port=5432,
     user='postgres',
     password='',
     sslmode='allow',
@@ -90,16 +90,17 @@ buildings = Polygons(
 
   * Õigused www-data kasutajale baasist andmeid pärida:
 {{{
-sudo -u postgres psql -p 5433 osm
+sudo -u postgres psql -p 5432 osm
 psql (9.0.3, server 9.0.2)
 Type "help" for help.
+osm=# CREATE ROLE "www-data" LOGIN;
 osm=# GRANT SELECT ON ALL TABLES IN SCHEMA public TO "www-data";
 GRANT
 osm=# \q
 }}}
 == Mapserver ==
   * Installitud *sudo apt-get install cgi-mapserver*
-  * Konf */opt/mapserver* kataloogis, kujundus */opt/mapserver/osm-google-test.map*
+  * Konf */opt/mapserver* kataloogis, kujundus */opt/mapserver/osm-google-p5432.map*
   * Binary on */usr/lib/cgi-bin* kaustas, apache oskab seda sealt leida
   * URL wrapper */usr/lib/cgi-bin/wms* on ise lisatud, see sisaldab viidet .map failile (kujundusega).
   * avalik WMS URL: http://kaart.maakaart.ee/cgi-bin/wms . NB! see on aeglane, avalikult kasutada tuleks Mapproxy URL-i, vt järgmine ptk
