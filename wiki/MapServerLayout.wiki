@@ -1,0 +1,14 @@
+#summary Kuidas MapServeri layouti parandada
+
+  # Peab olema kasutajanimi kaart.maakaart.ee masinas, SSH ligipääs. Jaak teeb kasutaja. Minu tasuta lemmik SSH klient win all on winscp
+  # kodukataloogis on  näidisfail osm-google-est.map. Kui ei, kopeeri näiteks /opt/mapserver alt endale
+  # modi sedasama faili, või tekita endale teine fail - oma valik
+  # andmebaasiühendustes kaks varianti:
+    * _Eesti andmed, testimiseks pisut kiirem:_ CONNECTION "dbname=osmee port=5432"
+    * _Kogu planeedi andmed:_ CONNECTION "dbname=osm port=5432"
+  # Kontrolli viited teistes kataloogides olevatele asjadele, tõenäoliselt pole vaja muuta:
+    * /opt/mapserver/ ... failidele/kataloogidele - fonts, data
+    * kui oma fonte, stiile vms vaja kasutada, võib kopida oma kodukausta
+  # WMS URL - siin asenda KASUTAJA oma kasutajanimega ja kontrolli kas .map faili nimi on sama mida tahad näidata: *http://kaart.maakaart.ee/cgi-bin/mapserv?MAP=/home/KASUTAJA/osm-google-est.map& *
+  # testimine - kasuta oma lemmik-WMS klienti ja eeltoodud URL-i. Mina kasutan QGIS-i. Vähemalt QGIS-is on vajalik on valida üks kiht, kasvõi kõige esimene (land0), miskipärast kihigruppi (default) valides kaarti ei renderdata.
+  # ära muuda faile teistes kataloogides (nt /osm/mapserver)
