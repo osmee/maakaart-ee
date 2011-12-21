@@ -119,7 +119,7 @@ GRANT SELECT ON ALL TABLES IN SCHEMA public TO "www-data";
   * imposm import võttis umbes 3 minutit, download umbes 5 minutit.
   * moditud kujundusfail : /opt/mapserver/osm-google-est.map
      # _Kõikidel kihtidel:_ *CONNECTION "dbname=osmee port=5432"*
-     # "ows_onlineresource"      "http://kaart.maakaart.ee/cgi-bin/mapserv?MAP=/opt/mapserver/osm-google-est.map&"
+     # Kommenteeri välja: #"ows_onlineresource"      "http://kaart.maakaart.ee/cgi-bin/mapserv?MAP=/opt/mapserver/osm-google-est.map&"
   * WMS URL: http://kaart.maakaart.ee/cgi-bin/mapserv?MAP=/opt/mapserver/osm-google-est.map&
 
 == Mapserver ==
