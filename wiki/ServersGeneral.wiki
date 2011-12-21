@@ -142,7 +142,7 @@ screen -RRD
 cd /opt/mapproxy
 mapproxy-util serve-develop mapproxy.yaml
 }}}
-  * live conf Apache mod_wsgi abil, vastavalt mapproxy manuaalile deploytud. Apache konfis teenuse URL on /osm, aga töötab ka /service ja /tiles läbi URL rewrite:
+  * live conf Apache mod_wsgi abil, vastavalt mapproxy manuaalile deploytud. Apache konfis */etc/apache2/sites-enabled/default* määratud teenuse URL on /osm, aga töötab ka /service ja /tiles läbi URL rewrite:
 {{{
         # mapproxy forward short URL-s
         RewriteEngine on
