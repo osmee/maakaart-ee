@@ -30,6 +30,7 @@ rtorrent http://osm-torrent.torres.voyager.hr/files/planet-latest.osm.bz2.torren
   * Juniperis on selle jaoks suunatud 6881 port sisse
 
 == Imposm ==
+=== Planet ===
   * kasutatakse mapserveri poolt WMS-i APIs.
   * kompileeritud sourcest */opt/imposm* kataloogis lähtudes http://wiki.osgeo.org/wiki/Benchmarking_2011/Imposm juhendist
   * tekitab vahefailidena .cache failid, mis planeedi puhul võtavad kokku umbes 13GB. Nt kodukataloogis ei saa käivitada seetõttu
@@ -98,6 +99,29 @@ osm=# GRANT SELECT ON ALL TABLES IN SCHEMA public TO "www-data";
 GRANT
 osm=# \q
 }}}
+
+=== Eesti (kiiremaks testimiseks) ===
+{{{
+sudo su postgres
+createdb osmee
+psql -d osmee -f /usr/share/postgresql/contrib/postgis-1.5/postgis.sql
+psql -d osmee -f /usr/share/postgresql/contrib/postgis-1.5/spatial_ref_sys.sql
+exit
+cd /home/jaakl
+mkdir imposm_dataee
+wget http://download.geofabrik.de/osm/europe/estonia.osm.bz2
+export LD_LIBRARY_PATH=/opt/imposm/lib
+imposm --read --write --optimize --deploy-production-tables -d osmee  -m ../custommapping.py -c 4 estonia.osm.bz2
+sudo -u postgres psql osmee
+GRANT SELECT ON ALL TABLES IN SCHEMA public TO "www-data";
+\q
+}}}
+  * imposm import võttis umbes 3 minutit, download umbes 5 minutit.
+  * moditud kujundusfail : /opt/mapserver/osm-google-est.map
+     # _Kõikidel kihtidel:_ *CONNECTION "dbname=osmee port=5432"*
+     # "ows_onlineresource"      "http://kaart.maakaart.ee/cgi-bin/mapserv?MAP=/opt/mapserver/osm-google-est.map&"
+  * WMS URL: http://kaart.maakaart.ee/cgi-bin/mapserv?MAP=/opt/mapserver/osm-google-est.map&
+
 == Mapserver ==
   * Installitud *sudo apt-get install cgi-mapserver*
   * Konf */opt/mapserver* kataloogis, kujundus */opt/mapserver/osm-google-p5432.map*
