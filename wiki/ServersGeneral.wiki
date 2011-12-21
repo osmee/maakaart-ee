@@ -228,3 +228,8 @@ sudo service renderd restart
 sudo service apache2 restart
 }}}
   # renderd logi (veateated jms) leiab: /var/log/syslog.1
+  # eelrenderda madalad zoomid:
+{{{
+render_list -s /var/run/renderd/renderd.sock --all -z 0 -Z 10 -n 4 -m est
+render_list -s /var/run/renderd/renderd.sock --all -z 0 -Z 10 -n 4 -m default
+}}}
