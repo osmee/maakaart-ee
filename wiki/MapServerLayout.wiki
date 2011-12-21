@@ -1,6 +1,6 @@
 #summary Kuidas MapServeri layouti parandada
 
-  # Peab olema kasutajanimi kaart.maakaart.ee masinas, SSH ligipääs. Jaak teeb kasutaja. Minu tasuta lemmik SSH klient win all on winscp
+  # Peab olema kasutajanimi kaart.maakaart.ee masinas, SSH ligipääs. Jaak teeb kasutaja. Minu tasuta lemmik SSH klient win all on [http://winscp.net/ winscp]
   # kodukataloogis on  näidisfail osm-google-est.map. Kui ei, kopeeri näiteks /opt/mapserver alt endale
   # modi sedasama faili, või tekita endale teine fail - oma valik
   # andmebaasiühendustes kaks varianti:
