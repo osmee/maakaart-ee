@@ -211,6 +211,7 @@ XML=/home/mapnik/mapnik/osm_et.xml
 }}}
   # unifont (hiina tähed jms) jaoks modi /etc/mapnik-osm-data/inc/fontset-settings.inc faili
   # Konfi datasource-settings.xml.inc baasi ühendus (port 5433, user postgres). Kõikidel kujundustel.
+  # Eestikeelsete kohanimede jaoks inc/layer-placenames_et.xml.inc failis on "name" päritud hstore veerust: _...,COALESCE(tags -> 'name:et',tags -> 'name:en', "name") AS name ..._
   # muuda tilekataloog suuremale storagele:
 {{{
 sudo service renderd stop
