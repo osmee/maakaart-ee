@@ -168,3 +168,62 @@ sudo -u www-data mapproxy-seed -f mapproxy.yaml -c 1 seed.yaml
  {{{
 http://kaart.maakaart.ee/tiles/1.0.0/maaamet_orto_EPSG900913/$z/$x/$y.jpeg?origin=nw
 }}}
+
+=Mod_tile=
+Kasutan https://launchpad.net/~kakrueger/+ppa-packages ubuntu pakette.
+{{{
+sudo add-apt-repository ppa:kakrueger/openstreetmap
+sudo apt-get update
+sudo apt-get install apache2-dev
+sudo apt-get install renderd
+sudo apt-get install libapache2-mod-tile
+sudo apt-get install unifont
+}}}
+Tulemus:
+  # paketiga tulev layout ja shapefailid on /etc/mapnik-osm-data/osm.xml
+
+Lisasammud:
+  # kombineeri apache konfides default ja tileserver_site konfid, kontrolli ega path-is konflikte pole
+  # konfi /etc/renderd.conf, lisa est töötav kujundus, muuda fontide otsingut et unifont leitaks, määra path-id
+{{{
+[renderd]
+stats_file=/var/run/renderd/renderd.stats
+socketname=/var/run/renderd/renderd.sock
+num_threads=4
+tile_dir=/var/lib/mod_tile ; DOES NOT WORK YET
+
+[mapnik]
+plugins_dir=/usr/lib/mapnik/0.7/input
+font_dir=/usr/share/fonts/truetype/
+font_dir_recurse=true
+
+[default]
+URI=/modtile/default/
+XML=/etc/mapnik-osm-data/osm.xml
+;HOST=tile.openstreetmap.org
+;HTCPHOST=proxy.openstreetmap.org
+
+[est]
+URI=/modtile/est/
+XML=/home/mapnik/mapnik/osm_et.xml
+;HOST=tile.openstreetmap.org
+;HTCPHOST=proxy.openstreetmap.org
+}}}
+  # unifont (hiina tähed jms) jaoks modi /etc/mapnik-osm-data/inc/fontset-settings.inc faili
+  # Konfi datasource-settings.xml.inc baasi ühendus (port 5433, user postgres). Kõikidel kujundustel.
+  # muuda tilekataloog suuremale storagele:
+{{{
+sudo service renderd stop
+sudo cp -r /var/lib/mod_tile /suur
+sudo chown -R www-data /suur/mod_tile
+sudo rm -rf /var/lib/mod_tile
+sudo ln -s /suur/mod_tile /var/lib
+sudo service renderd start
+
+}}}
+  # iga kujunduse, renderd.conf ja osm.xml-ide muutmine nõuab nii apache2 kui renderd restarti:
+{{{
+sudo service renderd restart
+sudo service apache2 restart
+}}}
+  # renderd logi (veateated jms) leiab: /var/log/syslog.1
