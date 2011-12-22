@@ -212,6 +212,7 @@ sudo apt-get install unifont
 }}}
 Tulemus:
   # paketiga tulev layout ja shapefailid on koondatud */etc/mapnik-osm-data/osm.xml*
+  # see on libmapnik 0.7.1, mis töötab Mapnik kujundusega ilma seda konvertimata
 
 Lisasammud:
   # kustuta pakitud failid /etc/mapnik-osm/ kataloogist, vabastad sadu megabaite:
