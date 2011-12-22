@@ -169,7 +169,32 @@ sudo -u www-data mapproxy-seed -f mapproxy.yaml -c 1 seed.yaml
 http://kaart.maakaart.ee/tiles/1.0.0/maaamet_orto_EPSG900913/$z/$x/$y.jpeg?origin=nw
 }}}
 
-=Mod_tile=
+=Mapniku-põhine kaart=
+==osm2pgsql==
+  * Loo uus postgis baas '*gis*' 5433 pordis olevasse baasi (/suur/imposmdata kataloogis cluster). Vt eespool käske
+  * aktiveeri seal ka hstore extension, PostGres 9.0+ käib see SQL asemel järgnevalt:
+{{{
+psql -p 5433 gis
+create extension hstore;
+}}}   
+  * kompileeri osm2pgsql - viimane svn versioon
+{{{
+mkdir /opt/osm2pgsql/src
+cd /opt/osm2pgsql/src
+svn co http://svn.openstreetmap.org/applications/utils/export/osm2pgsql/
+cd osm2pgsql/
+./autogen.sh
+./configure
+sed -i 's/-g -O2/-O2 -march=native -fomit-frame-pointer/' Makefile
+make
+}}}
+  * Käivita import kasutades kiiret lahtipakkimise meetodit. Täisplaneedi kogu import võttis ikkagi vähemalt 5 ööpäeva.
+{{{
+cd  /opt/osm2pgsql/src/osm2pgsql
+bunzip2 -c /home/jaakl/planet-111123.osm.bz2 |./osm2pgsql --slim -d gis -U postgres --hstore -C 10000 --number-processes=4 -P 5433 /dev/stdin
+}}}
+
+==Mapnik ja Mod_tile==
 Kasutan https://launchpad.net/~kakrueger/+ppa-packages ubuntu pakette.
 {{{
 sudo add-apt-repository ppa:kakrueger/openstreetmap
