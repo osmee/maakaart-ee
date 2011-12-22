@@ -191,6 +191,7 @@ sudo rm *tgz
 sudo rm *zip
 }}}
   # kombineeri apache konfides default ja tileserver_site konfid, kontrolli ega path-is konflikte pole
+  # suurenda apache konfifailis aegu mis on tile genereerimiseks lubatud, muidu tuleb vähemalt esialgu liiga palju 404 not found.
   # konfi /etc/renderd.conf, lisa est töötav kujundus, muuda fontide otsingut et unifont leitaks, määra path-id
 {{{
 [renderd]
