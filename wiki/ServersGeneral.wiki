@@ -180,9 +180,16 @@ sudo apt-get install libapache2-mod-tile
 sudo apt-get install unifont
 }}}
 Tulemus:
-  # paketiga tulev layout ja shapefailid on /etc/mapnik-osm-data/osm.xml
+  # paketiga tulev layout ja shapefailid on koondatud */etc/mapnik-osm-data/osm.xml*
 
 Lisasammud:
+  # kustuta pakitud failid /etc/mapnik-osm/ kataloogist, vabastad sadu megabaite:
+{{{
+cd /etc/mapnik-osm/
+sudo rm *bz2
+sudo rm *tgz
+sudo rm *zip
+}}}
   # kombineeri apache konfides default ja tileserver_site konfid, kontrolli ega path-is konflikte pole
   # konfi /etc/renderd.conf, lisa est töötav kujundus, muuda fontide otsingut et unifont leitaks, määra path-id
 {{{
