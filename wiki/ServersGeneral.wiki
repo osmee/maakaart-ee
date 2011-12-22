@@ -228,8 +228,17 @@ sudo service renderd restart
 sudo service apache2 restart
 }}}
   # renderd logi (veateated jms) leiab: /var/log/syslog.1
-  # eelrenderda madalad zoomid:
+  # eelrenderda madalad zoomid, eestikeelne Eesti ala detailsemalt:
 {{{
 render_list -s /var/run/renderd/renderd.sock --all -z 0 -Z 10 -n 4 -m est
 render_list -s /var/run/renderd/renderd.sock --all -z 0 -Z 10 -n 4 -m default
+render_list -s /var/run/renderd/renderd.sock --all -y 598 -Y 621 -x 1148 -X 1184 -z 11 -Z 11 -n 4 -m est
+render_list -s /var/run/renderd/renderd.sock --all -y 1196 -Y 1242 -x 2296 -X 2368 -z 12 -Z 12  -n 4 -m est
+render_list -s /var/run/renderd/renderd.sock --all -y 2392 -Y 2484 -x 4592 -X 4736 -z 13 -Z 13  -n 4 -m est
+render_list -s /var/run/renderd/renderd.sock --all -y 4784 -Y 4968 -x 9184 -X 9472 -z 14 -Z 14  -n 4 -m est
+render_list -s /var/run/renderd/renderd.sock --all -y 9568 -Y 9936 -x 18368 -X 18944 -z 15 -Z 15  -n 4 -m est
+render_list -s /var/run/renderd/renderd.sock --all -y 19136 -Y 19872 -x 36736 -X 37888 -z 16 -Z 16  -n 4 -m est
+render_list -s /var/run/renderd/renderd.sock --all -y 38272 -Y 39744 -x 73472 -X 75776 -z 17 -Z 17  -n 4 -m est
+render_list -s /var/run/renderd/renderd.sock --all -y 76544 -Y 79488 -x 146944 -X 151552 -z 18 -Z 18  -n 4 -m est
+
 }}}
