@@ -127,6 +127,12 @@ GRANT SELECT ON ALL TABLES IN SCHEMA public TO "www-data";
   * Konf */opt/mapserver* kataloogis, kujundus */opt/mapserver/osm-google-p5432.map*
   * Binary on */usr/lib/cgi-bin* kaustas, apache oskab seda sealt leida
   * URL wrapper */usr/lib/cgi-bin/wms* on ise lisatud, see sisaldab viidet .map failile (kujundusega).
+{{{
+#!/bin/sh
+MAPSERV="/usr/lib/cgi-bin/mapserv"
+MS_MAPFILE="/opt/mapserver/osm-google-p5432.map" exec ${MAPSERV}
+}}}
+
   * avalik WMS URL: http://kaart.maakaart.ee/cgi-bin/wms . NB! see on aeglane, avalikult kasutada tuleks Mapproxy URL-i, vt järgmine ptk
 
 == Mapproxy ==
