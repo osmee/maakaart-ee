@@ -283,8 +283,10 @@ render_list -s /var/run/renderd/renderd.sock --all -y 76544 -Y 79488 -x 146944 -
 }}}
 
 ==Mapnik baasi pidev uuendus (minutely mapnik)==
-Note: Imposm/MapServer-i baasi uuendamiseks on täna veel ainus võimalus uus täisimport.
-Peamiselt http://wiki.openstreetmap.org/wiki/DE:Minutely_Mapnik põhjal.
+Note: Imposm/Mapserver-i baasi uuendamiseks on täna veel ainus võimalus uus täisimport.
+
+Allolev on peamiselt http://wiki.openstreetmap.org/wiki/DE:Minutely_Mapnik baasil.
+  # Installi ja kohanda load-next skript
 {{{
 cd /opt
 svn co https://svn.toolserver.org/svnroot/mazder/diff-import/ diffs
@@ -294,23 +296,24 @@ edit load-next
  # osm2pgsql command modify to add port there, remove unneeded parameters (style, host)
  # tile_exipry/expire.rb asemel kasutada mod_tile-ga tulevat render_expired skripti, ja seda kahe tileseti peal.
 }}}
-Siin on minu modifitseeritud [load-next] täiskujul.
-Genereeri state.txt, muutes URL-is kuupäev vastavalt viimasele imporditud planeedi ajale.
+
+Siin on minu modifitseeritud [LoadNext load-next] täiskujul.
+
+  # Genereeri state.txt, muutes URL-is kuupäev vastavalt viimasele imporditud planeedi ajale.
 {{{
 wget "http://toolserver.org/~mazder/replicate-sequences/?Y=2011&m=11&d=23&H=01&i=00&s=00&stream=minute" -O state.txt
 }}}
-Esialgu, kui planeet on päevi vanu (minul suisa 30 pv) 1-tunnise intervalliga jooksev uuendus, igas uuenduses on 6 tundi andmeid:
-nano configuration.txt
+  # Esialgu, kui planeet on päevi vanu (minul suisa 30 pv) 1-tunnise intervalliga jooksev uuendus, igas uuenduses on 6 tundi andmeid:
 {{{
+nano configuration.txt
 # 6 hours
 maxInterval = 21600
 sudo -u jaakl crontab -e
 @hourly /opt/diffs/load-next
 }}}
 
-Kui andmed hakkavad jõudma suhteliselt värskeks (< 1 pv vanaks), siis tuleks vähenda samm-sammult eriti crontabis (maxInterval võib jääda?) uuenduste perioodi, et kiiremad uuendused oleks, kuni 1 minutini välja.
-
-Tekitada webi skript mis näitab uuenduste seisu http://kaart.maakaart.ee/planetstate.php:
+TODO: kui andmed hakkavad jõudma suhteliselt värskeks (< 1 pv vanaks), siis tuleks vähenda samm-sammult eriti crontabis (maxInterval võib jääda?) uuenduste perioodi, et kiiremad uuendused oleks, kuni 1 minutini välja.
+  # Tekitada webi skript mis näitab uuenduste seisu http://kaart.maakaart.ee/planetstate.php:
 {{{
 nano /var/www/planetstate.php
 <?php
