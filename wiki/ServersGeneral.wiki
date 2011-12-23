@@ -303,16 +303,22 @@ Siin on minu modifitseeritud [LoadNext load-next] täiskujul.
 {{{
 wget "http://toolserver.org/~mazder/replicate-sequences/?Y=2011&m=11&d=23&H=01&i=00&s=00&stream=minute" -O state.txt
 }}}
-  # Esialgu, kui planeet on päevi vanu (minul suisa 30 pv) 1-tunnise intervalliga jooksev uuendus, igas uuenduses on 6 tundi andmeid:
+  # Esialgu, kui planeet on päevi vanu (minul suisa 30 pv) 1-tunnise intervalliga jooksev uuendus, igas uuenduses on 6 tundi andmeid. Kontrolli konfi ja lisa crontab-i load-next käivitus:
 {{{
 nano configuration.txt
 # 6 hours
 maxInterval = 21600
+
 sudo -u jaakl crontab -e
 @hourly /opt/diffs/load-next
 }}}
 
 TODO: kui andmed hakkavad jõudma suhteliselt värskeks (< 1 pv vanaks), siis tuleks vähenda samm-sammult eriti crontabis (maxInterval võib jääda?) uuenduste perioodi, et kiiremad uuendused oleks, kuni 1 minutini välja.
+  # load-next toimimist jälgi logidest, peamiselt neist failidest. Enamus aega võtab osm2pgsql baasi lugemine:
+{{{
+tail /opt/diffs/logs/run.log
+tail -f /opt/diffs/logs/osm2pgsql.log
+}}}
   # Tekitada webi skript mis näitab uuenduste seisu http://kaart.maakaart.ee/planetstate.php:
 {{{
 nano /var/www/planetstate.php
