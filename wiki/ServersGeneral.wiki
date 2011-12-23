@@ -286,7 +286,7 @@ render_list -s /var/run/renderd/renderd.sock --all -y 76544 -Y 79488 -x 146944 -
 Note: Imposm/Mapserver-i baasi uuendamiseks on täna veel ainus võimalus uus täisimport.
 
 Allolev on peamiselt http://wiki.openstreetmap.org/wiki/DE:Minutely_Mapnik baasil.
-  # Installi ja kohanda load-next skript
+  # Installi ja kohanda load-next skript. Siin on minu modifitseeritud [LoadNext load-next] täiskujul.
 {{{
 cd /opt
 svn co https://svn.toolserver.org/svnroot/mazder/diff-import/ diffs
@@ -294,11 +294,8 @@ cd diffs
 edit load-next
  # set database connections, directories for tools
  # osm2pgsql command modify to add port there, remove unneeded parameters (style, host)
- # tile_exipry/expire.rb asemel kasutada mod_tile-ga tulevat render_expired skripti, ja seda kahe tileseti peal.
+ # tile_exipry/expire.rb (aeglane!) asemel kasutada 10x kiiremat mod_tile-ga tulevat render_expired skripti, ja seda kahe tileseti peal.
 }}}
-
-Siin on minu modifitseeritud [LoadNext load-next] täiskujul.
-
   # Genereeri state.txt, muutes URL-is kuupäev vastavalt viimasele imporditud planeedi ajale.
 {{{
 wget "http://toolserver.org/~mazder/replicate-sequences/?Y=2011&m=11&d=23&H=01&i=00&s=00&stream=minute" -O state.txt
@@ -312,8 +309,7 @@ maxInterval = 21600
 sudo -u jaakl crontab -e
 @hourly /opt/diffs/load-next
 }}}
-
-TODO: kui andmed hakkavad jõudma suhteliselt värskeks (< 1 pv vanaks), siis tuleks vähenda samm-sammult eriti crontabis (maxInterval võib jääda?) uuenduste perioodi, et kiiremad uuendused oleks, kuni 1 minutini välja.
+  # TODO: kui andmed hakkavad jõudma suhteliselt värskeks (< 1 pv vanaks), siis tuleks vähenda samm-sammult eriti crontabis (maxInterval võib jääda?) uuenduste perioodi, et kiiremad uuendused oleks, kuni 1 minutini välja.
   # load-next toimimist jälgi logidest, peamiselt neist failidest. Enamus aega võtab osm2pgsql baasi lugemine:
 {{{
 tail /opt/diffs/logs/run.log
