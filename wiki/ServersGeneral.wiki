@@ -213,12 +213,18 @@ Tulemus:
   # see on libmapnik 0.7.1, mis töötab Mapnik kujundusega ilma seda konvertimata
 
 Lisasammud:
-  # kustuta pakitud failid /etc/mapnik-osm/ kataloogist, vabastad sadu megabaite:
+  # kustuta pakitud failid /etc/mapnik-osm-data/ kataloogist, vabastad sadu megabaite:
 {{{
-cd /etc/mapnik-osm/
+cd /etc/mapnik-osm-data/
 sudo rm *bz2
 sudo rm *tgz
 sudo rm *zip
+}}}
+  # tõsta failid suuremale storagele, tee symlink tagasi
+{{{
+sudo cp /etc/mapnik-osm-data /suur/mapnik-osm-data/
+sudo rm -rf /etc/mapnik-osm-data
+sudo ln -s /suur/mapnik-osm-data /etc
 }}}
   # kombineeri apache konfides default ja tileserver_site konfid, kontrolli ega path-is konflikte pole
   # suurenda apache konfifailis aegu mis on tile genereerimiseks lubatud, muidu tuleb vähemalt esialgu liiga palju 404 not found.
