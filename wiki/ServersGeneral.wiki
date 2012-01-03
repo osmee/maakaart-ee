@@ -36,6 +36,11 @@ rtorrent http://osm-torrent.torres.voyager.hr/files/planet-latest.osm.bz2.torren
   * kompileeritud sourcest */opt/imposm* kataloogis lähtudes http://wiki.osgeo.org/wiki/Benchmarking_2011/Imposm juhendist
   * tekitab vahefailidena .cache failid, mis planeedi puhul võtavad kokku umbes 13GB. Nt kodukataloogis ei saa käivitada seetõttu
   * vaikimisi konf impordib place kihis vaid name-tagi, seega eestikeelse jaoks on vaja impordikonfi modida (lisada "name:et") ja importida uuesti ning modida kujundusfaili (.map faili)
+  * kerneli konfi parandus:
+{{{
+sudo sh -c "echo 'kernel.shmmax=268435456' > /etc/sysctl.d/60-shmmax.conf
+sudo service procps start
+}}}
   * loo ja käivita andmebaas:
 {{{
 sudo mkdir /storage/imposmdb
