@@ -10,8 +10,10 @@
       /storage - kiire IO (reaalselt ~10% kiirem kui raid-5). Siin imposm planeet baas Mapserveri jaoks (osm), postgres port 5432.
     c) - 4x1GB, riistvara RAID-5, 3TB saadaval
       /suur  - kaardiandmete, tilede, muude baaside jms jaoks. Siin on osm2pgsql Mapnik baas (gis), veel üks imposm planeet testiks (osm) ja Eesti imposm testbaas (osmee), postgres port 5433.
-  # Testserver: 193.40.61.100 4G RAM. Siin on näiteks ADS baas.
-  # Juniperi ruuter/tulemüür live-serveri ees.
+   võrgukonf: staatiline lan ip 192.168.1.100. Suunatud tulemüürist. IMPI management saadaval.
+
+  # Testserver: 193.40.61.99 4G RAM. Siin on näiteks ADS baas.
+  # Juniperi ruuter/tulemüür live-serveri ees. Väline IP: 193.40.61.100
 
 = Tarkvara =
   # liveserveri üldjoonis: https://docs.google.com/drawings/d/1HGTn47iCXx4u17ZD3-FuSAXXMdwp4STH3OpoUr3ycr0/edit
