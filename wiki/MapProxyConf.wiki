@@ -1,4 +1,4 @@
-#summary meie mapproxy.yaml 30.10.2011 seisuga
+#summary meie mapproxy.yaml 03.01.2012 seisuga
 {{{
 services:
   demo:
@@ -32,8 +32,11 @@ services:
 
 layers:
   - name: osm
-    title: Maakaart.ee OSM WMS kaart.maakaart.ee/wms
+    title: Maakaart.ee OSM WMS kaart.maakaart.ee/service
     sources: [osm_cache]
+  - name: mapnik
+    title: Maakaart.ee OSM WMS Mapnik tile-dest
+    sources: [mapnik_cache]
   - name: maaamet_orto
     title: Maaameti ortofoto cache
     sources: [maaamet_orto_cache]
@@ -46,6 +49,15 @@ caches:
 #    grids: [GLOBAL_MERCATOR, global_geodetic_sqrt2]
     grids: [global_mercator_osm]
     sources: [osm_wms]
+    meta_buffer: 100
+    meta_size: [8, 8]
+    format: image/png
+    request_format: image/png
+    link_single_color_images: true
+  mapnik_cache:
+#    grids: [GLOBAL_MERCATOR, global_geodetic_sqrt2]
+    grids: [global_mercator_osm]
+    sources: [osm_mapnik]
     meta_buffer: 20
     meta_size: [4, 4]
     format: image/png
@@ -72,15 +84,31 @@ caches:
 
 
 sources:
+  osm_mapnik:
+    type: tile
+    grid: global_mercator_osm
+    url: http://localhost/modtile/est/%(z)s/%(x)s/%(y)s.png
+    origin: nw
   osm_wms:
-    type: wms
+    type: mapserver
     req:
-      url: http://localhost/cgi-bin/wms?
       layers: default
+      map: /opt/mapserver/osm-google-livewms.map
     concurrent_requests: 4
-    http:
-      client_timeout: 60000
+    mapserver:
+      binary: /usr/lib/cgi-bin/mapserv
+      working_dir: /opt/mapserver
     supported_srs: ['EPSG:4326', 'EPSG:31467', 'EPSG:900913', 'EPSG:3301']
+#  osm_wms:
+#    type: wms
+#    req:
+#      url: http://localhost/cgi-bin/mapserv?
+#      layers: default
+#      map: /opt/mapserver/osm-google-livewms.map
+#    concurrent_requests: 4
+#    http:
+#      client_timeout: 60000
+#    supported_srs: ['EPSG:4326', 'EPSG:31467', 'EPSG:900913', 'EPSG:3301']
 
   maaamet_ortofoto_wms:
     type: wms
@@ -162,6 +190,9 @@ globals:
   http:
     client_timeout: 60000
 
+  tiles:
+    expires_hours: 72
+
   # image/transformation options
   image:
       # resampling_method: nearest
@@ -174,7 +205,5 @@ globals:
   #     # shrink cached images up to this factor before
   #     # returning an empty image (for the first level)
   #     max_shrink_factor: 4.0
-
-
 
 }}}
