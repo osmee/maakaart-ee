@@ -142,6 +142,7 @@ MS_MAPFILE="/opt/mapserver/osm-google-p5432.map" exec ${MAPSERV}
   * avalik WMS URL: http://kaart.maakaart.ee/cgi-bin/wms . NB! see on aeglane, avalikult kasutada tuleks Mapproxy URL-i, vt järgmine ptk
 
 == Mapproxy ==
+  * install: *sudo pip install MapProxy*
   * conf: /opt/mapproxy/ kataloogis, vt MapProxyConf. Konfitud lokaalset mapserveri WMS kasutama + katseks Maaameti WMS (ei pruugi toimida täielikult). Tilede cache jaoks kataloog:
 {{{
 sudo mkdir /suur/mapproxy_cache
