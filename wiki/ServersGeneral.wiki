@@ -1,15 +1,16 @@
 #summary Üldinfo meie serverite osas, installatsiooni logi
 
 = Serverid =
-  # Live: kaart.maakaart.ee; toimivad ka aliased stiilis (a/b/c/misiganes).kaart.maakaart.ee. 16G RAM, 4.5TB ketast kokku, 8-core. Ubuntu 11.10 (viimane)
-   kettad:
-    a) 2x500GB SATA kettad, soft-RAID-1 (mirror)
-       / - 10GB
-       /home - 420G
-    b) 2x148 GB SAS ketast RAID-0 (stripe), soft-RAIDiga
-      /storage - kiire IO (reaalselt ~10% kiirem kui raid-5). Siin imposm planeet baas Mapserveri jaoks (osm), postgres port 5432.
-    c) - 4x1GB, riistvara RAID-5, 3TB saadaval
+  # Live: kaart.maakaart.ee; toimivad ka aliased stiilis (a/b/c/misiganes).kaart.maakaart.ee. 16G RAM, 8 ketast kokku, 8-core. Ubuntu 11.10 (viimane) server
+   kettad (RAID kontrolleri taga):
+    a) 2x500GB SATA kettad, RAID-1 (mirror)
+       / - 442GB
+    b) 2x148 GB SAS ketast RAID-0 (stripe)
+      /storage - kiire IO. Siin imposm planeet baas Mapserveri jaoks (osm), postgres port 5432.
+
+    c) - 4x1GB, riistvara RAID-10, 2TB saadaval
       /suur  - kaardiandmete, tilede, muude baaside jms jaoks. Siin on osm2pgsql Mapnik baas (gis), veel üks imposm planeet testiks (osm) ja Eesti imposm testbaas (osmee), postgres port 5433.
+
    võrgukonf: staatiline lan ip 192.168.1.100. Suunatud tulemüürist. IMPI management saadaval.
 
   # Testserver: 193.40.61.99 4G RAM. Siin on näiteks ADS baas.
