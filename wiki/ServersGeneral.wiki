@@ -166,6 +166,7 @@ mapproxy-util serve-develop mapproxy.yaml
         # mapproxy forward short URL-s
         RewriteEngine on
         RewriteRule   ^/service$  /osm/service [PT]
+        RewriteRule   ^/orto/(.*)$  /osm/tiles/1.0.0/maaamet_orto_EPSG900913/$1?origin=nw [PT]
         RewriteRule   ^/tiles/(.*)$  /osm/tiles/$1 [PT]
 
         # tileproxy in wsgi
@@ -185,7 +186,7 @@ sudo -u www-data mapproxy-seed -f mapproxy.yaml -c 1 seed.yaml
   * Avalik OSM WMS URL: http://kaart.maakaart.ee/service
   * Avalik Maaameti ortopiltide tile url kasutamiseks Potlatch2 sees:
  {{{
-http://kaart.maakaart.ee/tiles/1.0.0/maaamet_orto_EPSG900913/$z/$x/$y.jpeg?origin=nw
+http://kaart.maakaart.ee/orto/$z/$x/$y.jpeg
 }}}
 
 =Mapniku-põhine kaart=
