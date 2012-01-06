@@ -11,5 +11,5 @@
     * kui oma fonte, stiile vms vaja kasutada, võib kopida oma kodukausta
   # WMS URL - siin asenda KASUTAJA oma kasutajanimega ja kontrolli kas .map faili nimi on sama mida tahad näidata: *http://kaart.maakaart.ee/cgi-bin/mapserv?MAP=/home/KASUTAJA/osm-google-est.map& *
   # testimine - kasuta oma lemmik-WMS klienti ja eeltoodud URL-i. Mina kasutan QGIS-i. Vähemalt QGIS-is on vajalik on valida üks kiht, kasvõi kõige esimene (land0), miskipärast kihigruppi (default) valides kaarti ei renderdata.
- # eelvaade - http://kaart.maakaart.ee/usermap.html on käsitsi valitud kasutajad kihtidesse lisatud, eeldusel et map faili nime pole muudetud
+  # eelvaade - http://kaart.maakaart.ee/usermap.html on käsitsi valitud kasutajad kihtidesse lisatud, eeldusel et map faili nime pole muudetud
   # ära muuda faile teistes kataloogides (nt /osm/mapserver)
