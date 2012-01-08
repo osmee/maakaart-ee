@@ -144,7 +144,7 @@ GRANT SELECT ON ALL TABLES IN SCHEMA public TO "www-data";
 MAPSERV="/usr/lib/cgi-bin/mapserv"
 MS_MAPFILE="/opt/mapserver/osm-google-p5432.map" exec ${MAPSERV}
 }}}
-
+  * logid: */var/log/apache2/error.log* ja */tmp/mserr.log* 
   * avalik WMS URL: http://kaart.maakaart.ee/cgi-bin/wms . NB! see on aeglane, avalikult kasutada tuleks Mapproxy URL-i, vt järgmine ptk
 
 == Mapproxy ==
