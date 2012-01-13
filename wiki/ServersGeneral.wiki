@@ -189,6 +189,15 @@ sudo -u www-data mapproxy-seed -f mapproxy.yaml -c 1 seed.yaml
 http://kaart.maakaart.ee/orto/$z/$x/$y.jpeg
 }}}
 
+== MapFish Studio kujunduse lihtsamaks modimiseks ==
+Juhendi põhjal: http://camptocamp.github.com/Studio/installation_guide.html#for-the-impatient
+{{{
+mkdir /opt/mapfish
+cd /opt/mapfish
+wget http://camptocamp.github.com/Studio/_static/go-studio.py
+...
+}}}
+
 =Mapniku-põhine kaart=
 ==osm2pgsql==
   * Loo uus postgis baas '*gis*' 5433 pordis olevasse baasi (/suur/imposmdata kataloogis cluster). Vt eespool käske
