@@ -3,7 +3,7 @@
   # Peab olema kasutajanimi kaart.maakaart.ee masinas, SSH ligipääs. Jaak teeb kasutaja. Minu tasuta lemmik SSH klient win all on [http://winscp.net/ winscp]
   # kodukataloogis on  näidisfail osm-google-est.map. Kui ei, kopeeri näiteks /opt/mapserver alt endale.
   # map faili formaadi referents : http://mapserver.org/mapfile/
-  # modi sedasama faili, või tekita endale teine fail - oma valik
+  # modi sedasama faili, või tekita endale teine fail - oma valik. Allpoololev usermap.html toimib küll vaid täpselt sama failinimega, wms-päringus saab teisi kasutada.
   # andmebaasiühendustes kaks varianti:
     * _Eesti andmed, testimiseks pisut kiirem:_ CONNECTION "dbname=osmee port=5432"
     * _Kogu planeedi andmed:_ CONNECTION "dbname=osm port=5432"
@@ -14,4 +14,4 @@
   # testimine - kasuta oma lemmik-WMS klienti ja eeltoodud URL-i. Mina kasutan QGIS-i. Vähemalt QGIS-is on vajalik on valida üks kiht, kasvõi kõige esimene (land0), miskipärast kihigruppi (default) valides kaarti ei renderdata.
   # kui kaarti ei tule, ja on üldine veateade, vaata mapserveri logi: */tmp/mserr.log*
   # eelvaade - http://kaart.maakaart.ee/usermap.html on käsitsi valitud kasutajad kihtidesse lisatud, eeldusel et map faili nime pole muudetud
-  # ära muuda faile teistes kataloogides (nt /osm/mapserver)
+  # Palun ära muuda faile teistes kataloogides (nt /osm/mapserver)
