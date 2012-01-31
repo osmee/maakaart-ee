@@ -16,7 +16,7 @@ services:
       contact:
         person: Jaak Laineste
         position: contact
-        organization: MTÜ Avatud Maakaardi Setls
+        organization: MTÜ Avatud Maakaardi Selts
         address: 
         city: Tartu
         postcode: 
@@ -34,12 +34,21 @@ layers:
   - name: osm
     title: Maakaart.ee OSM WMS kaart.maakaart.ee/service
     sources: [osm_cache]
+  - name: osm_noname
+    title: Maakaart.ee OSM WMS kaart.maakaart.ee/service
+    sources: [osm_noname_cache]
   - name: mapnik
     title: Maakaart.ee OSM WMS Mapnik tile-dest
     sources: [mapnik_cache]
   - name: maaamet_orto
     title: Maaameti ortofoto cache
     sources: [maaamet_orto_cache]
+  - name: maaamet_reljeef
+    title: Maaameti reljeefi cache
+    sources: [maaamet_reljeef_cache]
+  - name: topo50
+    title: NL Topokaart
+    sources: [topo_cache]
   # - name: osm_full_example
   #   title: Omniscale OSM WMS - osm.omniscale.net
   #   sources: [osm_cache_full_example]
@@ -54,6 +63,25 @@ caches:
     format: image/png
     request_format: image/png
     link_single_color_images: true
+  osm_noname_cache:
+    grids: [global_mercator_osm]
+    sources: [osm_noname_mapserv]
+    meta_buffer: 100
+    meta_size: [8, 8]
+    format: image/png
+    request_format: image/png
+    link_single_color_images: true
+  topo_cache:
+    grids: [global_mercator_osm]
+    sources: [topo_mapserv]
+    meta_buffer: 10
+    meta_size: [2, 2]
+    format: image/png
+    request_format: image/png
+    link_single_color_images: true
+    cache:
+      type: mbtiles
+      filename: /suur/mapproxy_cache/topocache.mbtiles
   mapnik_cache:
 #    grids: [GLOBAL_MERCATOR, global_geodetic_sqrt2]
     grids: [global_mercator_osm]
@@ -67,6 +95,14 @@ caches:
 #    grids: [global_geodetic_sqrt2]
     grids: [global_mercator_osm]
     sources: [maaamet_ortofoto_wms]
+    meta_buffer: 0
+    meta_size: [4, 4]
+    format: image/jpeg
+    request_format: image/jpeg
+  maaamet_reljeef_cache:
+#    grids: [global_geodetic_sqrt2]
+    grids: [global_mercator_osm,ee_grid]
+    sources: [maaamet_reljeef_wms]
     meta_buffer: 0
     meta_size: [4, 4]
     format: image/jpeg
@@ -93,12 +129,32 @@ sources:
     type: mapserver
     req:
       layers: default
-      map: /opt/mapserver/osm-google-livewms.map
+      map: /opt/mapserver/osm-google-p5432.map
     concurrent_requests: 4
     mapserver:
       binary: /usr/lib/cgi-bin/mapserv
       working_dir: /opt/mapserver
-    supported_srs: ['EPSG:4326', 'EPSG:31467', 'EPSG:900913', 'EPSG:3301']
+#    supported_srs: ['EPSG:4326', 'EPSG:31467', 'EPSG:900913', 'EPSG:3301']
+  osm_noname_mapserv:
+    type: mapserver
+    req:
+      layers: default
+      map: /home/ats/osm-google-noname.map
+    concurrent_requests: 4
+    mapserver:
+      binary: /usr/lib/cgi-bin/mapserv
+      working_dir: /opt/mapserver
+#    supported_srs: ['EPSG:4326', 'EPSG:31467', 'EPSG:900913', 'EPSG:3301']
+  topo_mapserv:
+    type: mapserver
+    req:
+      layers: ee_topo
+      map: /suur/mapdata/eetopod/topo50wms.map
+    concurrent_requests: 4
+    mapserver:
+      binary: /usr/lib/cgi-bin/mapserv
+      working_dir: /opt/mapserver
+#    supported_srs: ['EPSG:4326', 'EPSG:900913']
 #  osm_wms:
 #    type: wms
 #    req:
@@ -117,6 +173,16 @@ sources:
       layers: of10000
     concurrent_requests: 4
     supported_srs: ['EPSG:4326']
+  maaamet_reljeef_wms:
+    type: wms
+    req:
+      url: http://kaart.maaamet.ee/wms/fotokaart?
+      layers: reljeef
+    concurrent_requests: 4
+    supported_srs: ['EPSG:3301']
+    coverage:
+      bbox: [500000, 6400000, 800000, 6800000]
+      bbox_srs: 'EPSG:3301'
 
 
   # overlay_full_example:
@@ -160,6 +226,12 @@ grids:
   #   bbox_srs: 'EPSG:4326'
   #   res_factor: 1.5
   #   num_levels: 25
+  ee_grid:
+    srs: 'EPSG:3301'
+    bbox: [20, 50, 30, 60]
+    bbox_srs: 'EPSG:4326'
+    res_factor: 1.5
+    num_levels: 25
 
 globals:
   # # coordinate transformation options
