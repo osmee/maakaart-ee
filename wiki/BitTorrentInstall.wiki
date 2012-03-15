@@ -36,7 +36,7 @@ urllib = True
 [site1]
 link = http://osm-torrent.torres.voyager.hr/files/rss.xml
 }}}
-  # Start RSSdler as daemon. It should now reload RSS in every 5 minutes and creates new .torrent files to my download diretory
+  # Start RSSdler as daemon. It should now reload RSS in every 5 minutes and creates new .torrent files to my download directory
 {{{
 rssdler -c /opt/rssdler/rssdler042/config -d
 }}}
