@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Eesti kaart</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/> 
+    <style type="text/css">
+      html, body, #basicMap {
+          width: 100%;
+          height: 100%;
+          margin: 0;
+      }
+      div.olControlAttribution, div.olControlScaleLine {
+          font-family: Verdana;
+          font-size: 0.7em;
+          bottom: 38px;
+      }
+      .olControlAttribution {
+          position      : absolute;
+          font-size     : 10px;
+          background    : rgba(0,0,0,0.1);
+          font-family   : Arial;
+          padding       : 2px 4px;
+          border-radius : 5px 0 0 0;
+      }
+	div.olControlZoomPanel {
+	    height: 108px;
+	    width: 36px;
+	    position: absolute;
+	    top: 20px;
+	    left: 20px;
+	}
+	div.olControlZoomPanel div {
+	    width: 36px;
+	    height: 36px;
+	    background-image: url(img/mobile-zoombar.png);
+	    left: 0;
+	}
+	div.olControlZoomPanel .olControlZoomInItemInactive {
+	    top: 0;
+	    background-position: 0 0;
+	}
+	div.olControlZoomPanel .olControlZoomToMaxExtentItemInactive {
+	    top: 36px;
+	    background-position: 0 -36px;
+	}
+	div.olControlZoomPanel .olControlZoomOutItemInactive {
+	    top: 72px;
+	    background-position: 0 -72px;
+	}
+	.olTileImage {
+	    -webkit-transition: opacity 0.2s linear;
+	    -moz-transition: opacity 0.2s linear;
+	    -o-transition: opacity 0.2s linear;
+	    transition: opacity 0.2s linear;
+	}	 div.olControlZoomPanel .olControlZoomInItemInactive,
+	            div.olControlZoomPanel .olControlZoomOutItemInactive {
+	                background: rgba(0,0,0,0.2);
+	                position: absolute;
+	            }
+	            div.olControlZoomPanel .olControlZoomInItemInactive {
+	                border-radius: 5px 5px 0 0;
+	            }
+	            div.olControlZoomPanel .olControlZoomOutItemInactive {
+	                border-radius: 0 0 5px 5px ;
+	                top: 37px;
+	            }
+	            div.olControlZoomPanel .olControlZoomOutItemInactive:after ,
+	            div.olControlZoomPanel .olControlZoomInItemInactive:after{
+	                font-weight: bold;
+	                content   : '+';
+	                font-size : 36px;
+	                padding:  7px;
+	                z-index: 2000;
+	                color     : #fff;
+	                line-height: 1em;
+	            }
+	            div.olControlZoomPanel .olControlZoomOutItemInactive:after{
+	                content: '–';
+	                line-height: 0.9em;
+	                padding: 0 8px;
+	            }
+	            div.olControlZoomPanel .olControlZoomToMaxExtentItemInactive {
+	                display: none;
+	            }
+    </style>
+    <script src="openlayers/lib/OpenLayers.js"></script>
+    <script>
+	// Get rid of address bar on iphone/ipod
+	var fixSize = function() {
+	    window.scrollTo(0,0);
+	    document.body.style.height = '100%';
+	    if (!(/(iphone|ipod)/.test(navigator.userAgent.toLowerCase()))) {
+	        if (document.body.parentNode) {
+	            document.body.parentNode.style.height = '100%';
+	        }
+	    }
+	};
+	setTimeout(fixSize, 700);
+	setTimeout(fixSize, 1500);
+
+      function init() {
+            var options = {
+                projection: new OpenLayers.Projection("EPSG:900913"),
+                displayProjection: new OpenLayers.Projection("EPSG:4326"),
+                units: "m",
+                maxResolution: 156543.0339,
+                maxExtent: new OpenLayers.Bounds(-20037508.34, -20037508.34,
+                                                 20037508.34, 20037508.34),
+                numZoomLevels: 19,
+                controls: [
+                        new OpenLayers.Control.Navigation(),
+                        new OpenLayers.Control.LayerSwitcher({'ascending':false}),
+                        new OpenLayers.Control.Permalink(),
+		               // new OpenLayers.Control.TouchNavigation({ // enabling this disables shift-zoombox feature
+		               //   dragPanOptions: {
+		               //       enableKinetic: true
+		               //   }
+		            //  }),
+		                new OpenLayers.Control.ZoomPanel(),
+                        new OpenLayers.Control.ScaleLine({geodesic:true}),
+                        new OpenLayers.Control.MousePosition(),
+                        new OpenLayers.Control.KeyboardDefaults(),
+			new OpenLayers.Control.Attribution(),
+                        new OpenLayers.Control.Graticule({
+                          intervals: [10],
+                          displayInLayerSwitcher: true,
+                          numPoints: 10,
+                          labelled: true,
+			  layerName: "Kraadivõrgustik",
+                          visible: false
+})
+                    ]
+            };
+
+        map = new OpenLayers.Map("basicMap",options);
+        var modtileDefault = new OpenLayers.Layer.OSM("Mapnik originaal", "modtile/default/${z}/${x}/${y}.png", {numZoomLevels: 19});
+        var modtileEt = new OpenLayers.Layer.OSM("Mapnik eesti k.", "modtile/est/${z}/${x}/${y}.png", {numZoomLevels: 19});
+        var layerTopo = new OpenLayers.Layer.WMS( "1:50 000 NL ajal. topokaardid",
+                    "/service", {
+                        layers: "topo50",
+                        format: "image/png"
+                        },
+                        {attribution: 'Nõukogude Liidu sõjajõud'}
+                        );
+
+	var layerWms = new OpenLayers.Layer.WMS( "MapServer no-cache WMS (test)",
+                    "http://kaart.maakaart.ee/cgi-bin/wms", {
+			layers: "default",
+			format: "image/png"
+			},
+			{attribution: '<a href="http://www.openstreetmap.org/">CC-by-SA OpenStreetMap</a>'}
+			);
+	var layerWmsCached = new OpenLayers.Layer.WMS("MapServer Cached WMS",
+                    "http://kaart.maakaart.ee/service", {
+			layers: "osm",
+			format: "image/png"
+			},
+			{attribution: '<a href="http://www.openstreetmap.org/">CC-by-SA OpenStreetMap</a>'}
+			);
+	var layerWmsMapnik = new OpenLayers.Layer.WMS("Mapnik Cached WMS eesti k.",
+                    "http://kaart.maakaart.ee/service", {
+			layers: "mapnik",
+			format: "image/png"
+			},
+			{attribution: '<a href="http://www.openstreetmap.org/">CC-by-SA OpenStreetMap</a>'}
+			);
+	var layerTms = new OpenLayers.Layer.OSM( "Mapnik tile eesti k.",
+                       "http://kaart.maakaart.ee/modtile/est/${z}/${x}/${y}.png"
+			);
+
+        map.addLayers([layerWmsCached,layerWms,layerWmsMapnik,modtileDefault,modtileEt,layerTopo]);
+		if(!map.getCenter())
+	         map.setCenter(new OpenLayers.LonLat(26.1234,59.1234) // Center of the map
+	          .transform(
+	            new OpenLayers.Projection("EPSG:4326"), // transform from WGS 1984
+	            new OpenLayers.Projection("EPSG:900913") // to Spherical Mercator Projection
+	          ), 7 // Zoom level
+	        );
+	
+		// marker adding using marker=<marker image URL> URL parameter
+	    var markerUrl = getParameterByName("marker");
+	    if(markerUrl){
+			var img = new Image();
+			img.onload = function() {
+				   	var markers = new OpenLayers.Layer.Markers("Markers");
+					    map.addLayer(markers);
+						actualwidth = this.width;
+						actualheight = this.height;
+					/* server has:
+					/openlayers/img/marker.png
+					/openlayers/img/marker-blue.png
+					/openlayers/img/marker-green.png
+					/openlayers/img/marker-gold.png
+
+					*/
+			    	markers.addMarker(new OpenLayers.Marker(map.getCenter(),new OpenLayers.Icon(markerUrl,new OpenLayers.Size(actualwidth,actualheight))));
+
+			}
+				img.onerror = function() {
+						markerUrl = "/openlayers/img/marker.png";
+						var markers = new OpenLayers.Layer.Markers("Markers");
+				    	map.addLayer(markers);
+						actualwidth = 20;
+						actualheight = 24;
+				    	markers.addMarker(new OpenLayers.Marker(map.getCenter(),new OpenLayers.Icon(markerUrl,new OpenLayers.Size(actualwidth,actualheight))));
+				}
+			img.src = markerUrl;
+		}
+      }
+
+	function getParameterByName(name)
+	{
+	  name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
+	  var regexS = "[\\?&]" + name + "=([^&#]*)";
+	  var regex = new RegExp(regexS);
+	  var results = regex.exec(window.location.search);
+	  if(results == null)
+	    return "";
+	  else
+	    return decodeURIComponent(results[1].replace(/\+/g, " "));
+	}
+
+    </script>
+
+  </head>
+  <body onload="init();">
+    <div id="basicMap"></div>
+  </body>
+</html>
