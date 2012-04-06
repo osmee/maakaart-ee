@@ -5,7 +5,7 @@
 I use two CLI tools here to load and serve latest OSM planet from http://osm-torrent.torres.voyager.hr/ - rtorrent and rssdler. It is used in Ubuntu server, for desktop you have torrent GUI clients which just take RSS input easily.
 
 = RSSdler =
-  # Install soft
+  # Install soft. Note: _/suur_ is here special partition which accommodates easily hundreds of GB data)
 {{{
 sudo apt-get install python-feedparser
 sudo apt-get install python-mechanize
