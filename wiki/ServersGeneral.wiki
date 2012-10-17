@@ -201,6 +201,9 @@ wget http://camptocamp.github.com/Studio/_static/go-studio.py
   * Loo uus postgis baas '*gis*' 5433 pordis olevasse baasi (/suur/imposmdata kataloogis cluster). Vt eespool käske
   * aktiveeri seal ka hstore extension, PostGres 9.0+ käib see SQL asemel järgnevalt:
 {{{
+createdb gis -p 5433
+psql -d gis -p 5433 -f /usr/share/postgresql/9.1/contrib/postgis-1.5/postgis.sql
+psql -d gis -p 5433 -f /usr/share/postgresql/9.1/contrib/postgis-1.5/spatial_ref_sys.sql
 psql -p 5433 gis
 create extension hstore;
 }}}   
