@@ -367,3 +367,8 @@ echo file_get_contents($statefile);
 echo "</pre>";
 ?>
 }}}
+
+Kontrolli kui palju oleme ajast maas:
+{{{
+jaakl@kaart:/opt/diffs$ sudo -u www-data osmosis -q --read-replication-lag humanReadable=yes workingDirectory=/opt/diffs
+}}}
