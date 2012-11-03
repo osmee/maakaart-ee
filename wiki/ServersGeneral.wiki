@@ -93,7 +93,7 @@ buildings = Polygons(
 
 }}}
 
-  * Õigused www-data kasutajale baasist andmeid pärida:
+  * Õigused www-data kasutajale baasist andmeid pärida. NB! grant tuleb anda ka pärast iga baasi full update!
 {{{
 sudo -u postgres psql -p 5432 osm
 psql (9.0.3, server 9.0.2)
