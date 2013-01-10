@@ -12,7 +12,7 @@
 
    võrgukonf: staatiline lan ip 192.168.1.100. Suunatud tulemüürist. IMPI management saadaval.
 
-  # Testserver: 193.40.61.99 4G RAM. Siin on näiteks ADS baas.
+  # ~~Testserver: 193.40.61.99 4G RAM. Siin on näiteks ADS baas.~~ ei ole 2012 enam
   # Juniperi ruuter/tulemüür live-serveri ees. Väline IP: 193.40.61.100
 
 = Tarkvara =
