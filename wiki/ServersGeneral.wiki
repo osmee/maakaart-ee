@@ -103,6 +103,13 @@ GRANT
 osm=# \q
 }}}
 
+
+{{{
+# puhasta mapproxy cache, kasulik pärast uuendust. peab jooksma www-data kasutaja alt, sest cache (apache) on selle salvestanud selle alt
+jaakl@kaart:/opt/mapproxy$ sudo -u www-data mapproxy-seed -f mapproxy.yaml --cleanup clean1 -c 4 seed.yaml 
+
+}}}
+
 === Eesti (kiiremaks testimiseks) ===
 {{{
 sudo su postgres
