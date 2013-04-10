@@ -193,6 +193,8 @@ sudo -u www-data mapproxy-seed -f mapproxy.yaml -c 1 seed.yaml
 http://kaart.maakaart.ee/orto/$z/$x/$y.jpeg
 }}}
 
+MapProxy demo site: http://kaart.maakaart.ee/osm/demo/
+
 == MapFish Studio kujunduse lihtsamaks modimiseks ==
 Juhendi põhjal: http://camptocamp.github.com/Studio/installation_guide.html#for-the-impatient
 {{{
