@@ -21,7 +21,7 @@ $dbconn = pg_connect("host=" . $config['Database']['servername'] .
           or die('Could not connect: ' . pg_last_error());
 pg_set_client_encoding("UTF-8");
 
-$sql="SELECT *, x(centroid(transform(way, 4326))) AS lon, y(centroid(transform(way, 4326))) AS lat FROM planet_osm_polygon WHERE st_contains(way,transform(SetSRID(st_point($lon,$lat),4326),900913));";
+$sql="SELECT *, x(centroid(transform(way, 4326))) AS lon, y(centroid(transform(way, 4326))) AS lat FROM osm_admin WHERE st_contains(way,transform(SetSRID(st_point($lon,$lat),4326),900913));";
   
 #print ($sql."<br/>");
 // Run query
@@ -33,8 +33,7 @@ while ($line = pg_fetch_array($result, null, PGSQL_ASSOC)) {
  print "<a href=\"http://www.openstreetmap.org/browse/way/".$line[osm_id]."\">".$line[osm_id]."</a> </td><td>";
  print $line[name]." </td><td>";
  print $line[admin_level]." </td><td>";
- print $line["name:et"]." </td><td>";
- print $line["name:en"]." </td><td>";
+ print $line[type]." </td><td>";
  print $line[lon]." </td><td>";
  print $line[lat]." </td><td>";
  
