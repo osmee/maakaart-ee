@@ -110,6 +110,9 @@ osm=# \q
 # puhasta mapproxy cache, kasulik pärast uuendust. peab jooksma www-data kasutaja alt, sest cache (apache) on selle salvestanud selle alt
 jaakl@kaart:/opt/mapproxy$ sudo -u www-data mapproxy-seed -f mapproxy.yaml --cleanup clean1 -c 4 seed.yaml 
 
+# puhaste maaameti ortod
+jaakl@kaart:/opt/mapproxy$ sudo -u www-data mapproxy-seed -f mapproxy.yaml --cleanup clean_maaamet -c 4 seed.yaml
+
 ```
 
 ### Eesti (kiiremaks testimiseks)
@@ -190,18 +193,16 @@ cd /opt/mapproxy
 sudo -u www-data mapproxy-seed -f mapproxy.yaml -c 1 seed.yaml
 ```
   * Avalik OSM WMS URL: http://kaart.maakaart.ee/service
-  * Avalik Maaameti ortopiltide tile url kasutamiseks Potlatch2 sees:
+  * Avalik Maaameti ortopiltide tile url kasutamiseks 
 ```
+# Potlatch2 (flash web editor) sees:
 http://kaart.maakaart.ee/orto/$z/$x/$y.jpeg
+
+# iD (javascript web editor) sees:
+http://kaart.maakaart.ee/tiles/1.0.0/maaamet_orto_EPSG900913/{z}/{x}/{y}.jpeg?origin=nw
+
 ```
 
 MapProxy demo site: http://kaart.maakaart.ee/osm/demo/
 
-## MapFish Studio kujunduse lihtsamaks modimiseks
-Juhendi põhjal: http://camptocamp.github.com/Studio/installation_guide.html#for-the-impatient
-```
-mkdir /opt/mapfish
-cd /opt/mapfish
-wget http://camptocamp.github.com/Studio/_static/go-studio.py
-...
-```
+
