@@ -27,8 +27,11 @@ clflush size    : 64
 cache_alignment : 64
 address sizes   : 48 bits physical, 48 bits virtual
 power management: ts ttp tm stc 100mhzsteps hwpstate
+
 ```
+
 ## cat /proc/meminfo
+
 ```
 MemTotal:        8194216 kB
 MemFree:           45932 kB
@@ -74,7 +77,9 @@ DirectMap2M:     2091008 kB
 DirectMap1G:     6291456 kB
 ```
 
-## cat /proc/diskstats | grep sd**```
+## cat /proc/diskstats | grep sd
+
+```
    8       0 sda 8211 6802 357416 42300 27733 2962281 23922282 9848100 1 132850 9890430
    8       1 sda1 259 1325 2242 360 0 0 0 0 0 280 360
    8       2 sda2 1 0 2 10 0 0 0 0 0 10 10
@@ -91,9 +96,10 @@ DirectMap1G:     6291456 kB
    8      96 sdg 798 59 28524 3400 489 1 1486 1130 0 1360 4530
    8     112 sdh 884 85 27396 3050 485 1 1431 370 0 1010 3420
 
-```**
+```
 
 ## lcpci
+
 ```
 [root@silja anz]# lspci
 00:00.0 Host bridge: ATI Technologies Inc RD890 PCI to PCI bridge (external gfx0 port A) (rev 02)
